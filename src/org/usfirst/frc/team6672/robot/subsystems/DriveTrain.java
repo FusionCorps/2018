@@ -6,6 +6,7 @@ import org.usfirst.frc.team6672.robot.commands.DriveNormal;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.PWMTalonSRX; 
@@ -17,8 +18,12 @@ public class DriveTrain extends Subsystem {
 
     // Put methods for controlling this subsystem here. Call these from Commands.
 
-	SpeedController lSpeedController = new Spark(RobotMap.SPCONTROLLER_LEFT);
-	SpeedController rSpeedController = new Spark(RobotMap.SPCONTROLLER_RIGHT);
+	SpeedController lSpeedController = new Spark(0);
+	SpeedController l2SpeedController = new Spark(1);
+	SpeedController rSpeedController = new Spark(2);
+	SpeedController r2SpeedController = new Spark(3);
+	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
+	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
 	
 	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedController, rSpeedController);
 	ADXRS450_Gyro gyro = new ADXRS450_Gyro();

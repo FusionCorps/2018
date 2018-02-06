@@ -40,7 +40,10 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auton mode", chooser);
+		SmartDashboard.putData("Current Command", Scheduler.getInstance());
+		SmartDashboard.putData("Current Drive Train", driveTrain);
+		SmartDashboard.putData("Current Box Intake", boxIntake);
 	}
 
 	/**
