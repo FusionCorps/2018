@@ -18,10 +18,10 @@ public class DriveTrain extends Subsystem {
 
     // Put methods for controlling this subsystem here. Call these from Commands.
 
-	SpeedController lSpeedController = new Spark(0);
-	SpeedController l2SpeedController = new Spark(1);
-	SpeedController rSpeedController = new Spark(2);
-	SpeedController r2SpeedController = new Spark(3);
+	SpeedController lSpeedController = new Spark(4);
+	SpeedController l2SpeedController = new Spark(3);
+	SpeedController rSpeedController = new Spark(1);
+	SpeedController r2SpeedController = new Spark(0);
 	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
 	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
 	
