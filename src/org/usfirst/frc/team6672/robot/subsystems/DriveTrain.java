@@ -20,8 +20,8 @@ public class DriveTrain extends Subsystem {
 
 	SpeedController lSpeedController = new Spark(4);
 	SpeedController l2SpeedController = new Spark(3);
-	SpeedController rSpeedController = new Spark(1);
-	SpeedController r2SpeedController = new Spark(0);
+	SpeedController rSpeedController = new Spark(6);
+	SpeedController r2SpeedController = new Spark(7);
 	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
 	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
 	

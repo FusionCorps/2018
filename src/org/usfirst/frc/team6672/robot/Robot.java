@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team6672.robot.commands.*;
 import org.usfirst.frc.team6672.robot.subsystems.*;
-import org.usfirst.frc.team6672.robot.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +25,7 @@ import org.usfirst.frc.team6672.robot.*;
 public class Robot extends TimedRobot {	
 	public static DriveTrain driveTrain = new DriveTrain();
 	public static BoxIntake boxIntake = new BoxIntake();
+	public static LiftMechanism liftMechanism = new LiftMechanism();
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static RobotTables robotTables;
@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Current Command", Scheduler.getInstance());
 		SmartDashboard.putData("Current Drive Train", driveTrain);
 		SmartDashboard.putData("Current Box Intake", boxIntake);
+		SmartDashboard.putData("Current Lift Mechanism", liftMechanism);
 	}
 
 	/**
