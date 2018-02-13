@@ -40,6 +40,18 @@ public class BoxIntake extends Subsystem {
 		intakeGroup.set(Robot.oi.getStickAxis(3));
 	}
 	
+	public void boxIntakeFixed() {
+		controller1.setInverted(true);
+		controller2.setInverted(false);
+		intakeGroup.set(speed);
+	}
+	
+	public void boxEjectFixed() {
+		controller1.setInverted(false);
+		controller2.setInverted(true);
+		intakeGroup.set(speed);
+	}
+	
 	public void boxStop() {
 		intakeGroup.set(0.0);
 	}

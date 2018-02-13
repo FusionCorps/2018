@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.PWMTalonSRX; 
 
 /**
  *
@@ -25,7 +24,7 @@ public class DriveTrain extends Subsystem {
 	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
 	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
 	
-	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedController, rSpeedController);
+//	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedController, rSpeedController);
 	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	
 	double driveSpeed = 0.6;
@@ -40,11 +39,11 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void arcadeDrive() {
-		robotDrive.arcadeDrive(Robot.oi.getStickAxis(1) * driveSpeed, Robot.oi.getStickAxis(4) * rotateSpeed);
+//		robotDrive.arcadeDrive(Robot.oi.getStickAxis(1) * driveSpeed, Robot.oi.getStickAxis(4) * rotateSpeed);
 	}
 	
 	public void gyroDrive(double xSpeed, double zRotation) {
-		robotDrive.curvatureDrive(xSpeed, zRotation, false);
+//		robotDrive.curvatureDrive(xSpeed, zRotation, false);
 	}
 	
 	public double getGyroAngle() {

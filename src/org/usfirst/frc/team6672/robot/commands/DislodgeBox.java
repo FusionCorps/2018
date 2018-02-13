@@ -1,9 +1,7 @@
 package org.usfirst.frc.team6672.robot.commands;
 
 import java.util.concurrent.TimeUnit;
-
 import org.usfirst.frc.team6672.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -23,16 +21,16 @@ public class DislodgeBox extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println("Dislodging...");
-       	Robot.boxIntake.boxEject();
+       	Robot.boxIntake.boxEjectFixed();
     	try {
-			TimeUnit.MILLISECONDS.sleep(200);
+			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	Robot.boxIntake.boxIntake();
+    	Robot.boxIntake.boxIntakeFixed();
        	try {
-    			TimeUnit.MILLISECONDS.sleep(200);
+    			TimeUnit.MILLISECONDS.sleep(100);
     		} catch (InterruptedException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
