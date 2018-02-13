@@ -86,5 +86,6 @@ public class OI {
 		lBumper.whileHeld(new LowerLift());
 		rBumper.whileHeld(new RaiseLift());
 		buttonBack.whileHeld(new DislodgeBox());
+		buttonStart.whileHeld(new BoxMusic());
 	}
 }

@@ -52,6 +52,17 @@ public class BoxIntake extends Subsystem {
 		intakeGroup.set(speed);
 	}
 	
+	public void boxMusicSpeed(double musicSpeed) {
+		controller1.setInverted(false);
+		controller2.setInverted(false);
+		if(musicSpeed == 0.0) {
+			intakeGroup.set(musicSpeed);
+		}
+		else {
+			intakeGroup.set(musicSpeed+0.1);
+		}
+	}
+	
 	public void boxStop() {
 		intakeGroup.set(0.0);
 	}
