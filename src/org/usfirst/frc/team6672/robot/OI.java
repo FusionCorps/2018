@@ -8,9 +8,6 @@
 package org.usfirst.frc.team6672.robot;
 
 import org.usfirst.frc.team6672.robot.commands.*;
-
-import com.ctre.phoenix.time.StopWatch;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton; 
@@ -79,10 +76,6 @@ public class OI {
 		buttonB.whenPressed(new SetRotateSpeed(0.7));
 		buttonX.whenPressed(new SetRotateSpeed(0.6));
 		buttonY.whenPressed(new SetDriveSpeed(0.8));
-//		rBumper.whenPressed(new SetDriveSpeed(1.0));
-//		buttonBack.whenPressed(new RaiseLift());
-//		buttonStart.whenPressed(new LowerLift());
-//		lBumper.whenPressed(new StopLift());
 		lBumper.whileHeld(new LowerLift());
 		rBumper.whileHeld(new RaiseLift());
 		buttonBack.whileHeld(new DislodgeBox());

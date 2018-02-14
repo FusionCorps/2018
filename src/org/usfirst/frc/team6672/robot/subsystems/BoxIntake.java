@@ -16,8 +16,8 @@ public class BoxIntake extends Subsystem {
 //	WPI_TalonSRX lIntakeController = new WPI_TalonSRX(3);
 //	WPI_TalonSRX rIntakeController = new WPI_TalonSRX(1);
 //	SpeedControllerGroup intakeGroup = new SpeedControllerGroup(lIntakeController, rIntakeController);
-	Spark controller1 = new Spark(0);
-	Spark controller2 = new Spark(1);
+	Spark controller1 = new Spark(2);
+	Spark controller2 = new Spark(3);
 	SpeedControllerGroup intakeGroup = new SpeedControllerGroup(controller1, controller2);
 
 	double speed = 0.6;
@@ -30,7 +30,7 @@ public class BoxIntake extends Subsystem {
 //		intakeGroup.setInverted(false);
 		controller1.setInverted(true);
 		controller2.setInverted(false);
-		intakeGroup.set(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3));
+		intakeGroup.set(Robot.oi.getStickAxis(3)-Robot.oi.getStickAxis(2));
 	}
 	
 	public void boxEject() {

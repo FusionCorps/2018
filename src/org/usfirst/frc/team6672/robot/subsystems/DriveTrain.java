@@ -17,18 +17,18 @@ public class DriveTrain extends Subsystem {
 
     // Put methods for controlling this subsystem here. Call these from Commands.
 
-	SpeedController lSpeedController = new Spark(4);
-	SpeedController l2SpeedController = new Spark(3);
-	SpeedController rSpeedController = new Spark(6);
-	SpeedController r2SpeedController = new Spark(7);
-	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
-	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
+	SpeedController lSpeedController = new Spark(1);
+	SpeedController l2SpeedController = new Spark(0);
+//	SpeedController rSpeedController = new Spark(6);
+//	SpeedController r2SpeedController = new Spark(7);
+//	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
+//	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
 	
-//	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedController, rSpeedController);
+	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedController, l2SpeedController);
 	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	
-	double driveSpeed = 0.6;
-	double rotateSpeed = 0.6;
+	double driveSpeed = 0.8;
+	double rotateSpeed = 0.8;
 	
 	public void setDriveSpeed(double newDriveSpeed) {
 		driveSpeed = newDriveSpeed;
@@ -39,12 +39,12 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void arcadeDrive() {
-//		robotDrive.arcadeDrive(Robot.oi.getStickAxis(1) * driveSpeed, Robot.oi.getStickAxis(4) * rotateSpeed);
+		robotDrive.arcadeDrive(Robot.oi.getStickAxis(1) * driveSpeed, Robot.oi.getStickAxis(0) * rotateSpeed);
 	}
 	
-	public void gyroDrive(double xSpeed, double zRotation) {
+//	public void gyroDrive(double xSpeed, double zRotation) {
 //		robotDrive.curvatureDrive(xSpeed, zRotation, false);
-	}
+//	}
 	
 	public double getGyroAngle() {
 		return gyro.getAngle();
