@@ -32,7 +32,5 @@ public class RobotMap {
 //	rBumper = 6				DPad		= 6
 //	buttonBack = 7			
 //	buttonStart = 8			
-	
-	public static final int SPCONTROLLER_RIGHT = 0;
-	public static final int SPCONTROLLER_LEFT = 1;	
+
 }

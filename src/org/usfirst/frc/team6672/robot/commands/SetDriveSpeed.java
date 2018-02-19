@@ -8,10 +8,12 @@ import org.usfirst.frc.team6672.robot.*;
 public class SetDriveSpeed extends Command {
 
 	double speed = 0.6;
+	double mNewSpeed;
 	
     public SetDriveSpeed(double newSpeed) {
         // Use requires() here to declare subsystem dependencies
         //requires(Robot.driveTrain);
+    	mNewSpeed = newSpeed;
     	speed = newSpeed;
     }
 
@@ -26,7 +28,12 @@ public class SetDriveSpeed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(speed == mNewSpeed) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 
     // Called once after isFinished returns true

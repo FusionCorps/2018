@@ -10,10 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetLiftSpeed extends Command {
 
 	double speed = 0.3;
+	double mNewSpeed;
 	
     public SetLiftSpeed(double newSpeed) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	mNewSpeed = newSpeed;
     	speed = newSpeed;
     }
 
@@ -28,7 +30,12 @@ public class SetLiftSpeed extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(speed == mNewSpeed) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 
     // Called once after isFinished returns true

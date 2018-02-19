@@ -1,14 +1,15 @@
 package org.usfirst.frc.team6672.robot.commands;
 
 import org.usfirst.frc.team6672.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LowerLift extends Command {
+public class HoldLift extends Command {
 	
-    public LowerLift() {
+    public HoldLift() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.liftMechanism);
     }
@@ -19,8 +20,8 @@ public class LowerLift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.limitBot.get()) {
-        	Robot.liftMechanism.raiseLift();
+    	if(Robot.limitTop.get()) {
+        	Robot.liftMechanism.holdLift();
     	}
     	else {
     		Robot.liftMechanism.stopLift();

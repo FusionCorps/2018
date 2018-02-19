@@ -1,14 +1,13 @@
 package org.usfirst.frc.team6672.robot.commands;
 
 import org.usfirst.frc.team6672.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class RaiseLift extends Command {
-
+	
     public RaiseLift() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.liftMechanism);
@@ -20,8 +19,15 @@ public class RaiseLift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.liftMechanism.setSpeed(0.3);
-    	Robot.liftMechanism.raiseLift();
+    	if(Robot.limitTop.get()) {
+        	Robot.liftMechanism.raiseLift();
+    	}
+    	else if (!Robot.limitTop.get()) {
+    		Robot.liftMechanism.holdLift();
+    	}
+    	else {
+    		Robot.liftMechanism.stopLift();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

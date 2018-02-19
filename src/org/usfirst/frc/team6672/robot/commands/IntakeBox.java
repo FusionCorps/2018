@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6672.robot.commands;
 
 import org.usfirst.frc.team6672.robot.Robot;
-import java.util.concurrent.TimeUnit;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

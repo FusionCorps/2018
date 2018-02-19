@@ -18,12 +18,12 @@ public class BoxMusic extends Command {
 	double stop = 0.0;		//
 	double hN = 2.0;		// Put this before any note to make it a
 							// 		half note
-	boolean isHalfNote = false;
+	
 	double[] twinkle = { d, d, a, a, b, b, hN, a, g, g, f, f, e, e, hN, d, a, 
 			a, g, g, f, f, hN, e, a, a, g, g, f, f, hN, e, d, d, a, a, b, b,
 			hN, a, g, g, f, f, e, e, hN, d };
 	
-    public void BoxMusic() {
+    public BoxMusic() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.boxIntake);
     }
@@ -34,6 +34,7 @@ public class BoxMusic extends Command {
     
     public void playMusic(double[] inputMusic) {
     	for(double x : inputMusic) {
+    		boolean isHalfNote = false;
     		if(x == 2.0) {
     			isHalfNote = true;
     			continue;

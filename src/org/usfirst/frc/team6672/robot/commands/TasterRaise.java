@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LowerLift extends Command {
-	
-    public LowerLift() {
+public class TasterRaise extends Command {
+
+    public TasterRaise() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.liftMechanism);
+       requires(Robot.tasteMechanism);
     }
 
     // Called just before this Command runs the first time
@@ -19,12 +19,7 @@ public class LowerLift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.limitBot.get()) {
-        	Robot.liftMechanism.raiseLift();
-    	}
-    	else {
-    		Robot.liftMechanism.stopLift();
-    	}
+    	Robot.tasteMechanism.raiseTaster();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,7 +29,7 @@ public class LowerLift extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.liftMechanism.stopLift();
+    	Robot.tasteMechanism.stopTaster();
     }
 
     // Called when another command which requires one or more of the same

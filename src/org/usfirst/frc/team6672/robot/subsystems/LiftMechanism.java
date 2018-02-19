@@ -1,6 +1,8 @@
 package org.usfirst.frc.team6672.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import java.util.concurrent.TimeUnit;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
@@ -8,8 +10,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class LiftMechanism extends Subsystem {
 
-	WPI_TalonSRX liftController = new WPI_TalonSRX(4);
-	double speed = 0.3;
+	WPI_TalonSRX liftController = new WPI_TalonSRX(2);
+	double speed = 0.8;
 
 	public void setSpeed(double newSpeed) {
 		speed = newSpeed;
@@ -26,12 +28,29 @@ public class LiftMechanism extends Subsystem {
 	}
 	
 	public void stopLift() {
-		liftController.stopMotor();
+		liftController.set(0.0);
+	}
+	
+	public void holdLift() {
+		liftController.set(0.0);
+    	try {
+			TimeUnit.MILLISECONDS.sleep(30);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	liftController.set(0.4);
+    	try {
+			TimeUnit.MILLISECONDS.sleep(30);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+//        setDefaultCommand(());
     }
 }
 

@@ -54,6 +54,7 @@ public class OI {
 	Button rBumper = new JoystickButton(stick, 6);
 	Button buttonBack = new JoystickButton(stick, 7);
 	Button buttonStart = new JoystickButton(stick, 8);
+	Button rightStick = new JoystickButton(stick, 10);
 	
 	public double getStickAxis(int axis) {
 		return stick.getRawAxis(axis);
@@ -72,13 +73,16 @@ public class OI {
 	}
 	
 	public OI() {
-		buttonA.whenPressed(new SetRotateSpeed(1.0));
-		buttonB.whenPressed(new SetRotateSpeed(0.7));
-		buttonX.whenPressed(new SetRotateSpeed(0.6));
-		buttonY.whenPressed(new SetDriveSpeed(0.8));
+		buttonA.whileHeld(new HoldLift());
+		buttonX.whenPressed(new SetDriveSpeed(0.4));
+		buttonY.whenPressed(new SetDriveSpeed(1.0));
+//		buttonB.whenPressed(new SetRotateSpeed(0.7));
+//		buttonX.whenPressed(new SetRotateSpeed(0.6));
+//		buttonY.whenPressed(new SetDriveSpeed(0.8));
 		lBumper.whileHeld(new LowerLift());
 		rBumper.whileHeld(new RaiseLift());
 		buttonBack.whileHeld(new DislodgeBox());
-		buttonStart.whileHeld(new BoxMusic());
+		buttonStart.whileHeld(new TasterRaise());
+		rightStick.whileHeld(new WinchRaise());
 	}
 }
