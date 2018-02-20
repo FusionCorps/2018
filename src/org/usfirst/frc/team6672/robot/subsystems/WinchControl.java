@@ -1,0 +1,39 @@
+package org.usfirst.frc.team6672.robot.subsystems;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team6672.robot.commands.winch.StopWinch;
+
+import edu.wpi.first.wpilibj.Spark;
+
+/**
+ *
+ */
+public class WinchControl extends Subsystem {
+
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
+	
+	Spark winchController = new Spark(2);
+
+	double speed = 0.4;
+	
+	public void setWinchSpeed(double newSpeed) {
+		speed = newSpeed;
+	}
+	
+	public void raiseWinch() {
+		winchController.setInverted(true);
+		winchController.set(speed);
+	}
+	
+	public void stopWinch() {
+		winchController.set(0.0);
+	}
+	
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new StopWinch());
+    }
+}
+

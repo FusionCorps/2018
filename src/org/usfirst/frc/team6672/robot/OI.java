@@ -8,6 +8,14 @@
 package org.usfirst.frc.team6672.robot;
 
 import org.usfirst.frc.team6672.robot.commands.*;
+import org.usfirst.frc.team6672.robot.commands.box.DislodgeBox;
+import org.usfirst.frc.team6672.robot.commands.drive.SetDriveSpeed;
+import org.usfirst.frc.team6672.robot.commands.lift.HoldLift;
+import org.usfirst.frc.team6672.robot.commands.lift.LowerLift;
+import org.usfirst.frc.team6672.robot.commands.lift.RaiseLift;
+import org.usfirst.frc.team6672.robot.commands.taster.RaiseTaster;
+import org.usfirst.frc.team6672.robot.commands.winch.RaiseWinch;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton; 
@@ -82,7 +90,7 @@ public class OI {
 		lBumper.whileHeld(new LowerLift());
 		rBumper.whileHeld(new RaiseLift());
 		buttonBack.whileHeld(new DislodgeBox());
-		buttonStart.whileHeld(new TasterRaise());
-		rightStick.whileHeld(new WinchRaise());
+		buttonStart.whileHeld(new RaiseTaster());
+		rightStick.whileHeld(new RaiseWinch());
 	}
 }
