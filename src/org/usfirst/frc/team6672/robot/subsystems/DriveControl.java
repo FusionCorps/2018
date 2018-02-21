@@ -31,6 +31,8 @@ public class DriveControl extends Subsystem {
 	double driveSpeed = 0.8;
 	double rotateSpeed = 0.8;
 	
+	double Kp = 0.03;
+	
 	public void setDriveSpeed(double newDriveSpeed) {
 		driveSpeed = newDriveSpeed;
 	}
@@ -47,8 +49,25 @@ public class DriveControl extends Subsystem {
 		robotDrive.curvatureDrive(xSpeed, zRotation, false);
 	}
 	
+	public void stop() {
+		robotDrive.stopMotor();
+	}
+	
 	public double getGyroAngle() {
 		return gyro.getAngle();
+	}
+	
+	public void resetGyro() {
+		gyro.reset();
+	}
+	
+	public void straightDrive(double tempSpeed) {
+		double angle = gyro.getAngle();
+		gyroDrive(tempSpeed, -angle*Kp);
+	}
+	
+	public void gyroTurn(double turnSpeed) {
+		double angle = gyro.getAngle();
 	}
 	
     public void initDefaultCommand() {

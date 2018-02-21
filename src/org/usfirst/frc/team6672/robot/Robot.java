@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
-import org.usfirst.frc.team6672.robot.commands.*;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
 import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
 import org.usfirst.frc.team6672.robot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
+import org.usfirst.frc.team6672.robot.AutonControl;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
 	public static LiftControl liftControl = new LiftControl();
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
+	public static AutonControl autonControl = new AutonControl();
 	
 	public static OI oi;
 	
@@ -118,6 +119,8 @@ public class Robot extends TimedRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		Robot.driveControl.resetGyro();
+		autonControl.runAuton();
 	}
 
 	/**
@@ -130,7 +133,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		
+		Robot.driveControl.resetGyro();
 	}
 
 	/**
