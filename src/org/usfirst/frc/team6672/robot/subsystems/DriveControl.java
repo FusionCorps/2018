@@ -2,7 +2,6 @@ package org.usfirst.frc.team6672.robot.subsystems;
 
 import org.usfirst.frc.team6672.robot.*;
 import org.usfirst.frc.team6672.robot.commands.drive.DriveNormal;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -45,8 +44,8 @@ public class DriveControl extends Subsystem {
 		robotDrive.curvatureDrive(-Robot.oi.getStickAxis(1) * driveSpeed, Robot.oi.getStickAxis(4) * rotateSpeed, true);
 	}
 	
-	public void gyroDrive(double xSpeed, double zRotation) {
-		robotDrive.curvatureDrive(xSpeed, zRotation, false);
+	public void curveDrive(double xSpeed, double zRotation) {
+		robotDrive.curvatureDrive(xSpeed, zRotation, true);
 	}
 	
 	public void stop() {
@@ -61,13 +60,14 @@ public class DriveControl extends Subsystem {
 		gyro.reset();
 	}
 	
-	public void straightDrive(double tempSpeed) {
+	public void gyroDrive(double tempSpeed) {
 		double angle = gyro.getAngle();
-		gyroDrive(tempSpeed, -angle*Kp);
+		curveDrive(tempSpeed, -angle*Kp);
 	}
 	
-	public void gyroTurn(double turnSpeed) {
+	public void gyroDrive(double tempSpeed, int turnAmt) {
 		double angle = gyro.getAngle();
+		curveDrive(tempSpeed, (-angle+turnAmt)*Kp);
 	}
 	
     public void initDefaultCommand() {
