@@ -34,7 +34,8 @@ public class Robot extends TimedRobot {
 	public static LiftControl liftControl = new LiftControl();
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
-	public static AutonControl autonControl = new AutonControl();
+	
+	public static AutonControl autonControl = new AutonControl(false);	// Not subsystem control
 	
 	public static OI oi;
 	
@@ -58,6 +59,7 @@ public class Robot extends TimedRobot {
 		
 		CameraServer.getInstance().startAutomaticCapture();
 
+		// TODO Clean up smartdashboard sendablechoosers
 		SmartDashboard.putData("Scheduled Commands", Scheduler.getInstance());
 		SmartDashboard.putData("Drive Command", driveControl);
 		SmartDashboard.putData("Box Command", boxControl);
@@ -120,7 +122,7 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 		Robot.driveControl.resetGyro();
-		autonControl.runAuton();
+		autonControl.runAuton();				// Runs main auton program
 	}
 
 	/**
@@ -153,7 +155,8 @@ public class Robot extends TimedRobot {
 		cmWinchControl.start();
 		cmDriveControlRotate.start();
 		
-		SmartDashboard.updateValues();
+		SmartDashboard.updateValues();	//TODO Check if this does anything
+		// Would be nice if WPILib's API actually told us right?
 	}
 
 	/**

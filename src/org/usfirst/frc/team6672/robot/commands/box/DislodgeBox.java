@@ -20,21 +20,7 @@ public class DislodgeBox extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Dislodge");
-       	Robot.boxControl.boxEjectFixed();
-    	try {
-			TimeUnit.MILLISECONDS.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	Robot.boxControl.boxIntakeFixed();
-       	try {
-    			TimeUnit.MILLISECONDS.sleep(150);
-    		} catch (InterruptedException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    	}
+    	Robot.boxControl.boxDislodge();
     }
 
     // Make this return true when this Command no longer needs to run execute()

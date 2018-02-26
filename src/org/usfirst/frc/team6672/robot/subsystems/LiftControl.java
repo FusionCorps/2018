@@ -3,6 +3,8 @@ package org.usfirst.frc.team6672.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import java.util.concurrent.TimeUnit;
 
+import org.usfirst.frc.team6672.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
@@ -10,8 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class LiftControl extends Subsystem {
 
-	WPI_TalonSRX liftController = new WPI_TalonSRX(2);
-	double speed = 0.8;
+	WPI_TalonSRX liftController = new WPI_TalonSRX(RobotMap.LIFTCONTROL_TALON);
+	double speed = RobotMap.liftControl_def_speed;
 
 	public void setSpeed(double newSpeed) {
 		speed = newSpeed;

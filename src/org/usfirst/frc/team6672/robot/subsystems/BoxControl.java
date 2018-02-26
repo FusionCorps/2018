@@ -1,7 +1,11 @@
 package org.usfirst.frc.team6672.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import java.util.concurrent.TimeUnit;
+
 import org.usfirst.frc.team6672.robot.Robot;
+import org.usfirst.frc.team6672.robot.RobotMap;
 import org.usfirst.frc.team6672.robot.commands.box.IntakeBox;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -12,14 +16,14 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
  */
 public class BoxControl extends Subsystem {
 
-	WPI_TalonSRX controller1 = new WPI_TalonSRX(1);
-	WPI_TalonSRX controller2 = new WPI_TalonSRX(4);
+	WPI_TalonSRX controller1 = new WPI_TalonSRX(RobotMap.BOXCONTROL_TALON_L);
+	WPI_TalonSRX controller2 = new WPI_TalonSRX(RobotMap.BOXCONTROL_TALON_R);
 	SpeedControllerGroup intakeGroup = new SpeedControllerGroup(controller1, controller2);
 //	Spark controller1 = new Spark(2);
 //	Spark controller2 = new Spark(3);
 //	SpeedControllerGroup intakeGroup = new SpeedControllerGroup(controller1, controller2);
 
-	double speed = 0.6;
+	double speed = RobotMap.boxControl_def_speed;
 	
 	public void setSpeed(double newSpeed) {
 		speed = newSpeed;
@@ -47,6 +51,23 @@ public class BoxControl extends Subsystem {
 		controller1.setInverted(false);
 		controller2.setInverted(true);
 		intakeGroup.set(speed);
+	}
+	
+	public void boxDislodge() {
+       	boxEjectFixed();
+    	try {
+			TimeUnit.MILLISECONDS.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	boxIntakeFixed();
+       	try {
+    			TimeUnit.MILLISECONDS.sleep(150);
+    		} catch (InterruptedException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    	}
 	}
 	
 	public void boxMusicSpeed(double musicSpeed) {

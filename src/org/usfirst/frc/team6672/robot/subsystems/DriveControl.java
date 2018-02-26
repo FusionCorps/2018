@@ -16,10 +16,10 @@ public class DriveControl extends Subsystem {
 
     // Put methods for controlling this subsystem here. Call these from Commands.
 
-	SpeedController lSpeedController = new Spark(3);
-	SpeedController l2SpeedController = new Spark(4);
-	SpeedController rSpeedController = new Spark(0);
-	SpeedController r2SpeedController = new Spark(1);
+	SpeedController lSpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_L1);
+	SpeedController l2SpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_L2);
+	SpeedController rSpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_R1);
+	SpeedController r2SpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_R2);
 	
 	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
 	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
@@ -27,8 +27,8 @@ public class DriveControl extends Subsystem {
 	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedControllerGroup, rSpeedControllerGroup);
 	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	
-	double driveSpeed = 0.8;
-	double rotateSpeed = 0.8;
+	double driveSpeed = RobotMap.driveControl_def_driveSpeed;
+	double rotateSpeed = RobotMap.driveControl_def_rotateSpeed;
 	
 	double Kp = 0.03;
 	

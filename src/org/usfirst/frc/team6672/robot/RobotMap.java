@@ -33,4 +33,20 @@ public class RobotMap {
 //	buttonBack = 7			
 //	buttonStart = 8			
 
+	public static final int DRIVECONTROL_SPARK_L1 = 3;
+	public static final int DRIVECONTROL_SPARK_L2 = 4;
+	public static final int DRIVECONTROL_SPARK_R1 = 0;
+	public static final int DRIVECONTROL_SPARK_R2 = 1;
+	public static final int BOXCONTROL_TALON_L = 1;
+	public static final int BOXCONTROL_TALON_R = 4;
+	public static final int LIFTCONTROL_TALON = 2;
+	public static final int TASTERCONTROL_TALON = 3;
+	public static final int WINCHCONTROL_SPARK = 2;
+	
+	public static double boxControl_def_speed = 0.6;
+	public static double driveControl_def_driveSpeed= 0.8;
+	public static double driveControl_def_rotateSpeed = 0.8;
+	public static double liftControl_def_speed = 0.8;
+	public static double tasterControl_def_speed = 1.0;
+	public static double winchControl_def_speed = 0.4;
 }

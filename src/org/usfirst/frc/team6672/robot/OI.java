@@ -84,9 +84,6 @@ public class OI {
 		buttonA.whileHeld(new HoldLift());
 		buttonX.whenPressed(new SetDriveSpeed(0.4));
 		buttonY.whenPressed(new SetDriveSpeed(1.0));
-//		buttonB.whenPressed(new SetRotateSpeed(0.7));
-//		buttonX.whenPressed(new SetRotateSpeed(0.6));
-//		buttonY.whenPressed(new SetDriveSpeed(0.8));
 		lBumper.whileHeld(new LowerLift());
 		rBumper.whileHeld(new RaiseLift());
 		buttonBack.whileHeld(new DislodgeBox());
