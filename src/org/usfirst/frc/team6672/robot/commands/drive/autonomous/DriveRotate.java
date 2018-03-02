@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveRotate extends Command {
 
 	double mRunTime;
-	int mTurnAmt;
+	double mTurnAmt;
 	
-    public DriveRotate(double runTime, int turnAmt) {
+    public DriveRotate(double runTime, double turnAmt) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveControl);
         this.mRunTime = runTime;

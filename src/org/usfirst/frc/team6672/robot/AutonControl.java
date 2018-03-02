@@ -4,7 +4,6 @@ import org.usfirst.frc.team6672.robot.commands.box.EjectBox;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.*;
 import org.usfirst.frc.team6672.robot.commands.lift.LowerLift;
 import org.usfirst.frc.team6672.robot.commands.lift.RaiseLift;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -62,22 +61,20 @@ public class AutonControl {
 				// Switch on left-hand side
 				if(switchLocation == 'L') {
 					if(dsLocation == 1) {
-						Command driveStraight = new DriveStraight(2, 1.0);
+						Command driveStraight = new DriveStraight(1, -1.0);
 						driveStraight.start();
 					}
-					else if(dsLocation == 2) {
+					else if(dsLocation == 2) { // FINISHED
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep1 = new DriveStraight(1, 1.0);
-						Command rotateStep1 = new DriveRotate(1, -90);
-						Command driveStep2 = new DriveStraight(1, 1.0);
-						Command rotateStep2 = new DriveRotate(1, 90);
-						Command driveStep3 = new DriveStraight(1, 1.0);
+						Command driveStep1 = new DriveAndRotate(1, -0.3, -0.3);
+						Command driveStep3 = new DriveStraight(1, -0.5);
+						Command driveStep2 = new DriveAndRotate(0.4, 0.4, -0.4);
+						Command dS3 = new DriveStraight(1.25, -0.45);
 						
 						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(rotateStep1);
-						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(rotateStep2);
 						cmGrp.addSequential(driveStep3);
+						cmGrp.addSequential(driveStep2);
+						cmGrp.addSequential(dS3);
 						cmGrp.start();
 					}
 					else if(dsLocation == 3) {
@@ -106,33 +103,29 @@ public class AutonControl {
 						Command driveStraight = new DriveStraight(2, 1.0);
 						driveStraight.start();
 					}
-					else if(dsLocation == 2) {
+					else if(dsLocation == 2) { // FINISHED
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep1 = new DriveStraight(1, 1.0);
-						Command rotateStep1 = new DriveRotate(1, 90);
-						Command driveStep2 = new DriveStraight(1, 1.0);
-						Command rotateStep2 = new DriveRotate(1, -90);
-						Command driveStep3 = new DriveStraight(1, 1.0);
+						Command driveStep1 = new DriveAndRotate(0.5, 0.3, -0.3);
+						Command driveStep3 = new DriveStraight(1, -0.5);
+						Command driveStep2 = new DriveAndRotate(0.4, -0.3, -0.4);
+						Command dS3 = new DriveStraight(1.25, -0.5);
 						
 						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(rotateStep1);
-						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(rotateStep2);
 						cmGrp.addSequential(driveStep3);
+						cmGrp.addSequential(driveStep2);
+						cmGrp.addSequential(dS3);
 						cmGrp.start();
 					}
-					else if(dsLocation == 3) {
+					else if(dsLocation == 3) { // FINISHED
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep1 = new DriveStraight(1, 1.0);
-						Command rotateStep1 = new DriveRotate(1, -90);
-						Command driveStep2 = new DriveStraight(1, 1.0);
-						Command rotateStep2 = new DriveRotate(1, 90);
-						Command driveStep3 = new DriveStraight(1, 1.0);
+						Command driveStep0 = new DriveStraight(1, -0.6);
+						Command driveStep1 = new DriveAndRotate(1.25, 0.2, -0.3);
+						Command driveStep2 = new DriveAndRotate(1, -0.35, -0.4);
+						Command driveStep3 = new DriveStraight(1.25, -0.6);
 						
+						cmGrp.addSequential(driveStep0);
 						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(rotateStep1);
 						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(rotateStep2);
 						cmGrp.addSequential(driveStep3);
 						cmGrp.start();
 					}

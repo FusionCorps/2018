@@ -88,8 +88,8 @@ public class Robot extends TimedRobot {
 		cWinchControl.addObject("Winch (2)", new SetWinchSpeed(0.4));
 		
 		cDriveControlRotate.addObject("Rotate (10)", new SetRotateSpeed(1.0));	
-		cDriveControlRotate.addDefault("Rotate (8)", new SetRotateSpeed(0.8));	
-		cDriveControlRotate.addObject("Rotate (6)", new SetRotateSpeed(0.6));	
+		cDriveControlRotate.addObject("Rotate (8)", new SetRotateSpeed(0.8));	
+		cDriveControlRotate.addDefault("Rotate (6)", new SetRotateSpeed(0.6));	
 		cDriveControlRotate.addObject("Rotate (4)", new SetRotateSpeed(0.4));	
 
 		SmartDashboard.putData("Lift Speed", cLiftControl);
