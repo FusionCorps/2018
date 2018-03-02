@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonControl {
 
 	String gameData = getGameData();
-	boolean mIsSwitchTarget = false;
+	int mDSLocation;
+	boolean mIsSwitchTarget = false, mIsChooserActive = false;
 	
 	//	[ ]		3	
 	//			2	Autonomous 1
@@ -37,8 +38,13 @@ public class AutonControl {
 	//			2	Autonomous 6
 	//	[ ]	\/--1
 	
-	public AutonControl (boolean isSwitchTarget) {
+	public AutonControl (boolean isSwitchTarget, boolean isSendableChooserActive) {
 		this.mIsSwitchTarget = isSwitchTarget;
+		this.mIsChooserActive = isSendableChooserActive;
+	}
+	
+	public void SetDSLocation(int dsLocation) {
+		this.mDSLocation = dsLocation;
 	}
 	
 	public String getGameData() {
@@ -49,47 +55,46 @@ public class AutonControl {
 		return DriverStation.getInstance().getLocation();
 	}
 	
+	// TODO Clean up DS Selectors with SendableChooser options
+	// TODO Check if dsLocation detector actually works
 	public void runAuton() {
 		
 		char switchLocation = gameData.charAt(0);
-		int dsLocation = getDSLocation();
+		
+		if(mIsChooserActive) {
+			this.mDSLocation = getDSLocation();
+		}
+		else if(!mIsChooserActive) {
+		}
 		
 		if(DriverStation.getInstance().isAutonomous() && !mIsSwitchTarget) {// Check if in Auton and switch is NOT target
-			if(gameData.length() > 0) {							// Make sure gameData is not null
+			if(gameData.length() > 0) {										// Make sure gameData is not null
 				System.out.println("Entering auton switch...");
 				
 				// Switch on left-hand side
 				if(switchLocation == 'L') {
-					if(dsLocation == 1) {
+					if(mDSLocation == 1) {
 						Command driveStraight = new DriveStraight(1, -1.0);
 						driveStraight.start();
 					}
-					else if(dsLocation == 2) { // FINISHED
+					// FINISHED
+					else if(mDSLocation == 2) {
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep1 = new DriveAndRotate(1, -0.3, -0.3);
-						Command driveStep3 = new DriveStraight(1, -0.5);
-						Command driveStep2 = new DriveAndRotate(0.4, 0.4, -0.4);
-						Command dS3 = new DriveStraight(1.25, -0.45);
+						Command st1 = new DriveAndRotate(1, -0.3, -0.3),  st2 = new DriveStraight(1, -0.5),
+								st3 = new DriveAndRotate(0.4, 0.4, -0.4), st4 = new DriveStraight(1.25, -0.45);
 						
-						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(driveStep3);
-						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(dS3);
+						cmGrp.addSequential(st1);
+						cmGrp.addSequential(st2);
+						cmGrp.addSequential(st3);
+						cmGrp.addSequential(st4);
 						cmGrp.start();
 					}
-					else if(dsLocation == 3) {
+					else if(mDSLocation == 3) {
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep1 = new DriveStraight(2, 1.0);
-						Command rotateStep1 = new DriveRotate(1, 90);
-						Command driveStep2 = new DriveStraight(1, 1.0);
-						Command rotateStep2 = new DriveRotate(1, -90);
-						Command driveStep3 = new DriveStraight(1, 1.0);
+						Command st1 = new DriveAndRotate(1, 0.3, -0.3), st2 = new DriveStraight(1, -0.5);
 						
-						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(rotateStep1);
-						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(rotateStep2);
-						cmGrp.addSequential(driveStep3);
+						cmGrp.addSequential(st1);
+						cmGrp.addSequential(st2);
 						cmGrp.start();
 					}
 					else {
@@ -99,34 +104,32 @@ public class AutonControl {
 				
 				// Switch on right-hand side
 				else if(switchLocation == 'R') {
-					if(dsLocation == 1) {
+					if(mDSLocation == 1) {
 						Command driveStraight = new DriveStraight(2, 1.0);
 						driveStraight.start();
 					}
-					else if(dsLocation == 2) { // FINISHED
+					// FINISHED
+					else if(mDSLocation == 2) {
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep1 = new DriveAndRotate(0.5, 0.3, -0.3);
-						Command driveStep3 = new DriveStraight(1, -0.5);
-						Command driveStep2 = new DriveAndRotate(0.4, -0.3, -0.4);
-						Command dS3 = new DriveStraight(1.25, -0.5);
+						Command st1 = new DriveAndRotate(0.5, 0.3, -0.3),  st2 = new DriveStraight(1, -0.5),
+								st3 = new DriveAndRotate(0.4, -0.3, -0.4), st4 = new DriveStraight(1.25, -0.5);
 						
-						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(driveStep3);
-						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(dS3);
+						cmGrp.addSequential(st1);
+						cmGrp.addSequential(st2);
+						cmGrp.addSequential(st3);
+						cmGrp.addSequential(st4);
 						cmGrp.start();
 					}
-					else if(dsLocation == 3) { // FINISHED
+					// FINISHED
+					else if(mDSLocation == 3) {
 						CommandGroup cmGrp = new CommandGroup();
-						Command driveStep0 = new DriveStraight(1, -0.6);
-						Command driveStep1 = new DriveAndRotate(1.25, 0.2, -0.3);
-						Command driveStep2 = new DriveAndRotate(1, -0.35, -0.4);
-						Command driveStep3 = new DriveStraight(1.25, -0.6);
+						Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1.25, 0.2, -0.3),
+								st3 = new DriveAndRotate(1, -0.35, -0.4), st4 = new DriveStraight(1.25, -0.6);
 						
-						cmGrp.addSequential(driveStep0);
-						cmGrp.addSequential(driveStep1);
-						cmGrp.addSequential(driveStep2);
-						cmGrp.addSequential(driveStep3);
+						cmGrp.addSequential(st1);
+						cmGrp.addSequential(st2);
+						cmGrp.addSequential(st3);
+						cmGrp.addSequential(st4);
 						cmGrp.start();
 					}
 					else {
@@ -161,11 +164,11 @@ public class AutonControl {
 				
 				// Switch on left-hand side
 				if(switchLocation == 'L') {
-					if(dsLocation == 1) {
+					if(mDSLocation == 1) {
 						Command driveStraight = new DriveStraight(2, 1.0);
 						driveStraight.start();
 					}
-					else if(dsLocation == 2) {
+					else if(mDSLocation == 2) {
 						
 						/* TEST CASE HERE */
 						
@@ -193,7 +196,7 @@ public class AutonControl {
 						
 						cmGrp.start();
 					}
-					else if(dsLocation == 3) {
+					else if(mDSLocation == 3) {
 						CommandGroup cmGrp = new CommandGroup();
 						Command driveStep1 = new DriveStraight(2, 1.0);
 						Command rotateStep1 = new DriveRotate(1, 90);
@@ -215,11 +218,11 @@ public class AutonControl {
 				
 				// Switch on right-hand side
 				else if(switchLocation == 'R') {
-					if(dsLocation == 1) {
+					if(mDSLocation == 1) {
 						Command driveStraight = new DriveStraight(2, 1.0);
 						driveStraight.start();
 					}
-					else if(dsLocation == 2) {
+					else if(mDSLocation == 2) {
 						CommandGroup cmGrp = new CommandGroup();
 						Command driveStep1 = new DriveStraight(1, 1.0);
 						Command rotateStep1 = new DriveRotate(1, 90);
@@ -234,7 +237,7 @@ public class AutonControl {
 						cmGrp.addSequential(driveStep3);
 						cmGrp.start();
 					}
-					else if(dsLocation == 3) {
+					else if(mDSLocation == 3) {
 						CommandGroup cmGrp = new CommandGroup();
 						Command driveStep1 = new DriveStraight(1, 1.0);
 						Command rotateStep1 = new DriveRotate(1, -90);

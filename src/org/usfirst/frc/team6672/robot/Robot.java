@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
+import org.usfirst.frc.team6672.robot.commands.drive.autonomous.ChangeDSLocation;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
 import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
@@ -35,19 +36,21 @@ public class Robot extends TimedRobot {
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
 	
-	public static AutonControl autonControl = new AutonControl(false);	// Not subsystem control
+	public static AutonControl autonControl = new AutonControl(false, false);	// (isSwitchTarget, isChooserActive)
 	
 	public static OI oi;
 	
 	public static DigitalInput limitTop = new DigitalInput(9);
 	public static DigitalInput limitBot = new DigitalInput(8);
 	
-	Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate;
+	Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate,
+		cmChangeDSLocation;
 
 	SendableChooser<Command> cWinchControl = new SendableChooser<>();
 	SendableChooser<Command> cLiftControl = new SendableChooser<>();
 	SendableChooser<Command> cTasterControl = new SendableChooser<>();
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
+	SendableChooser<Command> cDriverStation = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -91,11 +94,16 @@ public class Robot extends TimedRobot {
 		cDriveControlRotate.addObject("Rotate (8)", new SetRotateSpeed(0.8));	
 		cDriveControlRotate.addDefault("Rotate (6)", new SetRotateSpeed(0.6));	
 		cDriveControlRotate.addObject("Rotate (4)", new SetRotateSpeed(0.4));	
+		
+		cDriverStation.addObject("DS Left", new ChangeDSLocation(1));
+		cDriverStation.addDefault("DS Middle", new ChangeDSLocation(2));
+		cDriverStation.addObject("DS Right", new ChangeDSLocation(3));
 
 		SmartDashboard.putData("Lift Speed", cLiftControl);
 		SmartDashboard.putData("Taster Speed", cTasterControl);
 		SmartDashboard.putData("Rotate Speed", cDriveControlRotate);
 		SmartDashboard.putData("Winch Speed", cWinchControl);
+		SmartDashboard.putData("DS Location", cDriverStation);
 	}
 
 	/**
@@ -121,6 +129,10 @@ public class Robot extends TimedRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		if(autonControl.mIsChooserActive) {
+			cmChangeDSLocation = cDriverStation.getSelected();
+			cmChangeDSLocation.start();
+		}
 		Robot.driveControl.resetGyro();
 		autonControl.runAuton();				// Runs main auton program
 	}
