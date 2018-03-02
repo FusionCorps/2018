@@ -58,14 +58,12 @@ public class BoxControl extends Subsystem {
     	try {
 			TimeUnit.MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	boxIntakeFixed();
        	try {
-    			TimeUnit.MILLISECONDS.sleep(150);
+    			TimeUnit.MILLISECONDS.sleep(200);
     		} catch (InterruptedException e) {
-    			// TODO Auto-generated catch block
     			e.printStackTrace();
     	}
 	}

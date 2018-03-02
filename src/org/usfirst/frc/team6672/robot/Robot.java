@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
-import org.usfirst.frc.team6672.robot.commands.drive.autonomous.ChangeDSLocation;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
 import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
@@ -36,7 +35,7 @@ public class Robot extends TimedRobot {
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
 	
-	public static AutonControl autonControl = new AutonControl(false, false);	// (isSwitchTarget, isChooserActive)
+	public static AutonControl autonControl = new AutonControl(false);	// (isSwitchTarget, isChooserActive)
 	
 	public static OI oi;
 	
@@ -50,8 +49,9 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> cLiftControl = new SendableChooser<>();
 	SendableChooser<Command> cTasterControl = new SendableChooser<>();
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
-	SendableChooser<Command> cDriverStation = new SendableChooser<>();
 
+	boolean isCalledBefore = false;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -80,30 +80,25 @@ public class Robot extends TimedRobot {
 
 		cTasterControl.addObject("Taster (10)", new SetTasterSpeed(1.0));	
 		cTasterControl.addDefault("Taster (8)", new SetTasterSpeed(0.8));
-		cTasterControl.addObject("Taster (6)", new SetTasterSpeed(0.6));
-		cTasterControl.addObject("Taster (4)", new SetTasterSpeed(0.4));
-		cTasterControl.addObject("Taster (2)", new SetTasterSpeed(0.4));
+		cTasterControl.addObject("Taster (5)", new SetTasterSpeed(0.5));
+		cTasterControl.addObject("Taster (-8)", new SetTasterSpeed(-0.8));
+		cTasterControl.addObject("Taster (-10)", new SetTasterSpeed(-1.0));
 		
 		cWinchControl.addObject("Winch (10)", new SetWinchSpeed(1.0));	
 		cWinchControl.addDefault("Winch (8)", new SetWinchSpeed(0.8));
-		cWinchControl.addObject("Winch (6)", new SetWinchSpeed(0.6));
-		cWinchControl.addObject("Winch (4)", new SetWinchSpeed(0.4));
-		cWinchControl.addObject("Winch (2)", new SetWinchSpeed(0.4));
+		cWinchControl.addObject("Winch (5)", new SetWinchSpeed(0.5));
+		cWinchControl.addObject("Winch (-8)", new SetWinchSpeed(-0.8));
+		cWinchControl.addObject("Winch (-10)", new SetWinchSpeed(-1.0));
 		
 		cDriveControlRotate.addObject("Rotate (10)", new SetRotateSpeed(1.0));	
 		cDriveControlRotate.addObject("Rotate (8)", new SetRotateSpeed(0.8));	
 		cDriveControlRotate.addDefault("Rotate (6)", new SetRotateSpeed(0.6));	
 		cDriveControlRotate.addObject("Rotate (4)", new SetRotateSpeed(0.4));	
-		
-		cDriverStation.addObject("DS Left", new ChangeDSLocation(1));
-		cDriverStation.addDefault("DS Middle", new ChangeDSLocation(2));
-		cDriverStation.addObject("DS Right", new ChangeDSLocation(3));
 
 		SmartDashboard.putData("Lift Speed", cLiftControl);
 		SmartDashboard.putData("Taster Speed", cTasterControl);
 		SmartDashboard.putData("Rotate Speed", cDriveControlRotate);
 		SmartDashboard.putData("Winch Speed", cWinchControl);
-		SmartDashboard.putData("DS Location", cDriverStation);
 	}
 
 	/**
@@ -129,12 +124,8 @@ public class Robot extends TimedRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
-		if(autonControl.mIsChooserActive) {
-			cmChangeDSLocation = cDriverStation.getSelected();
-			cmChangeDSLocation.start();
-		}
 		Robot.driveControl.resetGyro();
-		autonControl.runAuton();				// Runs main auton program
+//		autonControl.runAuton();				// Runs main auton program
 	}
 
 	/**
@@ -143,9 +134,24 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		if(autonControl.checkGameData() && !isCalledBefore) {
+			this.isCalledBefore = true;
+			autonControl.runAuton();
+		}
 	}
 
 	@Override
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void teleopInit() {
 		Robot.driveControl.resetGyro();
 	}
