@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
 	
-	public static AutonControl autonControl = new AutonControl(false);	// (isSwitchTarget, isChooserActive)
+	public static AutonControl autonControl = new AutonControl();	// (isSwitchTarget, isChooserActive)
 	
 	public static OI oi;
 	

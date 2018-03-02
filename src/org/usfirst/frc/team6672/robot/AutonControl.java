@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonControl {
 
 	String gameData = getGameData();
-	boolean mIsSwitchTarget = false;
 	
 	//	[ ]		3	
 	//			2	Autonomous 1
@@ -34,8 +33,7 @@ public class AutonControl {
 	//			2	Autonomous 6
 	//	[ ]	\/--1
 	
-	public AutonControl (boolean isSwitchTarget) {
-		this.mIsSwitchTarget = isSwitchTarget;
+	public AutonControl () {
 	}
 	
 	public boolean checkGameData() {
@@ -54,8 +52,8 @@ public class AutonControl {
 		
 		int dsLocation = getDSLocation();
 		
-		if(DriverStation.getInstance().isAutonomous() && !mIsSwitchTarget) {// Check if in Auton and switch is NOT target
-//			if(checkGameData()) {										// Make sure gameData is not null
+		if(DriverStation.getInstance().isAutonomous()) {// Check if in Auton and switch is NOT target
+			if(checkGameData()) {										// Make sure gameData is not null
 				System.out.println("Entering auton switch...");
 				char switchLocation = gameData.charAt(0);
 
@@ -133,8 +131,8 @@ public class AutonControl {
 				DriverStation.reportError("Auton failed to start (gameData)", true);
 			}
 		}
-//		else {
-//			DriverStation.reportError("Auton failed to start (not in Auton)", true);
-//		}
-//	}
+		else {
+			DriverStation.reportError("Auton failed to start (not in Auton)", true);
+		}
+	}
 }
