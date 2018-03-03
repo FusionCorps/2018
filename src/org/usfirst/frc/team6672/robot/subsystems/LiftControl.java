@@ -26,7 +26,7 @@ public class LiftControl extends Subsystem {
 	
 	public void lowerLift() {
 		liftController.setInverted(true);
-		liftController.set(speed);
+		liftController.set(0.1);
 	}
 	
 	public void stopLift() {

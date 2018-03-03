@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	
 	public static DigitalInput limitTop = new DigitalInput(9);
-	public static DigitalInput limitBot = new DigitalInput(8);
+//	public static DigitalInput limitBot = new DigitalInput(8);
 	
 	Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate,
 		cmChangeDSLocation;
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Winch Command", winchControl);
 		SmartDashboard.putData("Taster Command", tasterControl);
 		SmartDashboard.putData("Top Limit", limitTop);
-		SmartDashboard.putData("Bottom Limit", limitBot);
+//		SmartDashboard.putData("Bottom Limit", limitBot);
 		
 		cLiftControl.addObject("Lift (10)", new SetLiftSpeed(1.0));	
 		cLiftControl.addDefault("Lift (8)", new SetLiftSpeed(0.8));
@@ -130,11 +130,12 @@ public class Robot extends TimedRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
+		System.out.println("Autonomous initiating...");
 		Robot.driveControl.resetGyro();
 		cmChangeDSLocation = cRobotLocation.getSelected();
 		cmChangeDSLocation.start();
-		autonControl.runAuton();				// Runs main auton program
-
+		System.out.println("Driver Station has changed to: " + autonControl.mDSLocation);
+		autonControl.runAuton();	// Runs main auton program
 	}
 
 	/**
@@ -171,8 +172,7 @@ public class Robot extends TimedRobot {
 		cmWinchControl.start();
 		cmDriveControlRotate.start();
 		
-		SmartDashboard.updateValues();	//TODO Check if this does anything
-		// Would be nice if WPILib's API actually told us right?
+		SmartDashboard.updateValues();
 	}
 
 	/**

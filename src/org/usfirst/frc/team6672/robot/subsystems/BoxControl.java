@@ -32,7 +32,13 @@ public class BoxControl extends Subsystem {
 	public void boxIntake() {
 		controller1.setInverted(true);
 		controller2.setInverted(false);
-		intakeGroup.set(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3));
+		if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) >= 0.8) {
+			intakeGroup.set(0.8);
+		}
+		else if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) < 0.8) {
+			intakeGroup.set(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3));
+		}
+		
 	}
 	
 	public void boxEject() {
