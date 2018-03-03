@@ -9,7 +9,7 @@ public class AutonControl {
 	
 	// Default data
 	public String mGameData = "LLL";
-	public int mRobotLocation;
+	public int mRobotLocation = 3;
 	
 	//	[ ]		3	
 	//			2	Autonomous 1
@@ -50,7 +50,7 @@ public class AutonControl {
 			if(mGameData.length() > 0) {						// Make sure gameData is not null
 				System.out.println("****** ENTERING AUTON SWITCH ******");
 				System.out.println("Robot Location is: " + mRobotLocation);
-				System.out.println("Game Data is: " + mGameData);
+				System.out.println("Switch Location is: " + switchLocation);
 				
 				// Switch on left-hand side
 				if(switchLocation == 'L') {
@@ -100,7 +100,7 @@ public class AutonControl {
 					if(mRobotLocation == 1) {
 						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
-						Command st1 = new DriveStraight(1.5, -0.8);
+						Command st1 = new DriveStraight(1.5, -0.5);
 						
 						cmGrp.addSequential(st1);
 						cmGrp.start();
@@ -122,7 +122,7 @@ public class AutonControl {
 					else if(mRobotLocation == 3) {
 						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
-						Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1.25, 0.2, -0.4),
+						Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1, 0.2, -0.4),
 								st3 = new DriveAndRotate(1, -0.35, -0.3), st4 = new DriveStraight(1.25, -0.6);
 						
 						cmGrp.addSequential(st1);

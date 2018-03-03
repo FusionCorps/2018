@@ -22,6 +22,7 @@ import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
 import org.usfirst.frc.team6672.robot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import org.usfirst.frc.team6672.robot.AutonControl;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -98,9 +99,9 @@ public class Robot extends TimedRobot {
 		cDriveControlRotate.addDefault("Rotate (6)", new SetRotateSpeed(0.6));	
 		cDriveControlRotate.addObject("Rotate (4)", new SetRotateSpeed(0.4));	
 
-		cRobotLocation.addDefault("Left", new SetRobotLocation(1));
+		cRobotLocation.addObject("Left", new SetRobotLocation(1));
 		cRobotLocation.addObject("Middle", new SetRobotLocation(2));
-		cRobotLocation.addObject("Right", new SetRobotLocation(3));
+		cRobotLocation.addDefault("Right", new SetRobotLocation(3));
 		
 		SmartDashboard.putData("Lift Speed", cLiftControl);
 		SmartDashboard.putData("Taster Speed", cTasterControl);
@@ -116,7 +117,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
 	}
 
 	@Override
@@ -126,7 +126,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-//		Scheduler.getInstance().run();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -136,7 +135,10 @@ public class Robot extends TimedRobot {
 		DriverStation.reportWarning("Autonomous initiating...", false);
 		cmSetRobotLocation = cRobotLocation.getSelected();
 		cmSetRobotLocation.start();
+		Scheduler.getInstance().run();
 		autonControl.runAuton();	// Runs main auton program
+//		CommandGroup autonCmGrp = new CommandGroup();
+//		autonCmGrp.addSequential(cRobotLocation.getSelected());
 	}
 
 	/**
