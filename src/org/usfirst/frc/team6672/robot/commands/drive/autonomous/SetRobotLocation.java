@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SetRobotLocation extends Command {
 
 	public int mNewRobotLocation;
+	Robot robot = new Robot();
 	
     public SetRobotLocation(int newRobotLocation) {
         // Use requires() here to declare subsystem dependencies
@@ -22,18 +23,13 @@ public class SetRobotLocation extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.autonControl.setRobotLocation(mNewRobotLocation);
+    	robot.setRobotLocation(mNewRobotLocation);
     	System.out.println("Set robot location to: " + mNewRobotLocation);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.autonControl.mRobotLocation == mNewRobotLocation) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+    	return false;
     }
 
     // Called once after isFinished returns true

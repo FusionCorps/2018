@@ -15,13 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
+import org.usfirst.frc.team6672.robot.commands.drive.autonomous.DriveAndRotate;
+import org.usfirst.frc.team6672.robot.commands.drive.autonomous.DriveStraight;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.SetRobotLocation;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
 import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
 import org.usfirst.frc.team6672.robot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
-import org.usfirst.frc.team6672.robot.AutonControl;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -37,9 +38,7 @@ public class Robot extends TimedRobot {
 	public static LiftControl liftControl = new LiftControl();
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
-	
-	public static AutonControl autonControl = new AutonControl();	// (isSwitchTarget, isChooserActive)
-	
+		
 	public static OI oi;
 	
 	public static DigitalInput limitTop = new DigitalInput(9);
@@ -53,7 +52,8 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> cTasterControl = new SendableChooser<>();
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
 	SendableChooser<Command> cRobotLocation = new SendableChooser<>();
-//	boolean isCalledBefore = false;
+	
+	int mRobotLocation = 4; // Default value set to 4
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -124,6 +124,10 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	public void setRobotLocation(int newRobotLocation) {
+		this.mRobotLocation = newRobotLocation;
+	}
+	
 	@Override
 	public void autonomousInit() {
 		/*
@@ -133,13 +137,92 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 		DriverStation.reportWarning("Autonomous initiating...", false);
+		
 		cmSetRobotLocation = cRobotLocation.getSelected();
 		cmSetRobotLocation.start();
 		Scheduler.getInstance().run();
-		autonControl.runAuton();	// Runs main auton program
-//		CommandGroup autonCmGrp = new CommandGroup();
-//		autonCmGrp.addSequential(cRobotLocation.getSelected());
+		
+		char switchLocation = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
+		if(switchLocation == 'L') {
+			if(mRobotLocation == 1) {
+				System.out.println("Auton case is: " + switchLocation + mRobotLocation);
+				CommandGroup cmGrp = new CommandGroup();
+				Command st1 = new DriveStraight(1.5, -0.6),        st2 = new DriveAndRotate(0.5, -0.2, -0.4),
+						st3 = new DriveAndRotate(1.25, 0.3, -0.3), st4 = new DriveStraight(1.25, -0.6);
+				
+				cmGrp.addSequential(st1);
+				cmGrp.addSequential(st2);
+				cmGrp.addSequential(st3);
+				cmGrp.addSequential(st4);
+				cmGrp.start();
+			}
+			else if(mRobotLocation == 2) {
+				System.out.println("Auton case is: " + switchLocation + mRobotLocation);
+				CommandGroup cmGrp = new CommandGroup();
+				Command st1 = new DriveAndRotate(1, -0.3, -0.3),  st2 = new DriveStraight(1, -0.5),
+						st3 = new DriveAndRotate(0.6, 0.3, -0.4), st4 = new DriveStraight(1.25, -0.45);
+				
+				cmGrp.addSequential(st1);
+				cmGrp.addSequential(st2);
+				cmGrp.addSequential(st3);
+				cmGrp.addSequential(st4);
+				cmGrp.start();
+			}
+			else if(mRobotLocation == 3) {
+				System.out.println("Auton case is: " + switchLocation + mRobotLocation);
+				CommandGroup cmGrp = new CommandGroup();
+				Command st1 = new DriveStraight(3, -0.6);
+				
+				cmGrp.addSequential(st1);
+				cmGrp.start();
+			}
+			else {
+				DriverStation.reportError("Auton failed to start (dsLocation)", true);
+			}
+		}
+		else if(switchLocation == 'R') {
+			if(mRobotLocation == 1) {
+				System.out.println("Auton case is: " + switchLocation + mRobotLocation);
+				CommandGroup cmGrp = new CommandGroup();
+				Command st1 = new DriveStraight(1.5, -0.5);
+				
+				cmGrp.addSequential(st1);
+				cmGrp.start();
+			}
+			else if(mRobotLocation == 2) {
+				System.out.println("Auton case is: " + switchLocation + mRobotLocation);
+				CommandGroup cmGrp = new CommandGroup();
+				Command st1 = new DriveAndRotate(0.5, 0.3, -0.3),  st2 = new DriveStraight(1.25, -0.5),
+						st3 = new DriveAndRotate(0.4, -0.3, -0.4), st4 = new DriveStraight(1.25, -0.5);
+				
+				cmGrp.addSequential(st1);
+				cmGrp.addSequential(st2);
+				cmGrp.addSequential(st3);
+				cmGrp.addSequential(st4);
+				cmGrp.start();
+			}
+			else if(mRobotLocation == 3) {
+				System.out.println("Auton case is: " + switchLocation + mRobotLocation);
+				CommandGroup cmGrp = new CommandGroup();
+				Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1, 0.2, -0.4),
+						st3 = new DriveAndRotate(1, -0.35, -0.3), st4 = new DriveStraight(1.25, -0.6);
+				
+				cmGrp.addSequential(st1);
+				cmGrp.addSequential(st2);
+				cmGrp.addSequential(st3);
+				cmGrp.addSequential(st4);
+				cmGrp.start();
+			}
+			else {
+				DriverStation.reportError("Auton failed to start (robotLocation)", false);
+			}
+		}
+		else {
+			DriverStation.reportError("Auton failed to start (switchLocation)", false);
+		}
 	}
+		
+	
 
 	/**
 	 * This function is called periodically during autonomous.
