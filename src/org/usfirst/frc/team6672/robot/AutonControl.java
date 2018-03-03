@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonControl {
 	
-	String mGameData = "RRR";
+	String mGameData = "LLL";
 	
 	//	[ ]		3	
 	//			2	Autonomous 1
