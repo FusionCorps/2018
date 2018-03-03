@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonControl {
 	
 	// Default data
-	String mGameData = "LLL";
-	int mDSLocation = 4;
+	public String mGameData = "LLL";
+	public int mRobotLocation;
 	
 	//	[ ]		3	
 	//			2	Autonomous 1
@@ -38,38 +38,25 @@ public class AutonControl {
 	public AutonControl () {
 	}
 	
-	public boolean checkGameData() {
-		return mGameData.length() > 0;
-	}
-	
-	public String getGameData() {
-		return DriverStation.getInstance().getGameSpecificMessage();
-	}
-	
-	public int getDSLocation() {
-		return DriverStation.getInstance().getLocation();
-	}
-	
 	public void setRobotLocation(int robotLocation) {
-		this.mDSLocation = robotLocation;
+		this.mRobotLocation = robotLocation;
 	}
 	
 	public void runAuton() {
 		
-		String gameData = getGameData();
-		this.mGameData = gameData;
+		char switchLocation = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
 		
-		if(DriverStation.getInstance().isAutonomous()) {// Check if in Auton and switch is NOT target
-			if(checkGameData()) {										// Make sure gameData is not null
-				System.out.println("Entering auton switch...");
-				System.out.println("The Driver Station is: " + mDSLocation);
-				char switchLocation = gameData.charAt(0);
+		if(DriverStation.getInstance().isAutonomous()) {		// Check if in Auton and switch is NOT target
+			if(mGameData.length() > 0) {						// Make sure gameData is not null
+				System.out.println("****** ENTERING AUTON SWITCH ******");
+				System.out.println("Robot Location is: " + mRobotLocation);
+				System.out.println("Game Data is: " + mGameData);
 				
 				// Switch on left-hand side
 				if(switchLocation == 'L') {
 					// FINISHED
-					if(mDSLocation == 1) {
-						System.out.println("Case L1");
+					if(mRobotLocation == 1) {
+						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
 						Command st1 = new DriveStraight(1.5, -0.6),        st2 = new DriveAndRotate(0.5, -0.2, -0.4),
 								st3 = new DriveAndRotate(1.25, 0.3, -0.3), st4 = new DriveStraight(1.25, -0.6);
@@ -81,8 +68,8 @@ public class AutonControl {
 						cmGrp.start();
 					}
 					// FINISHED
-					else if(mDSLocation == 2) {
-						System.out.println("Case L2");
+					else if(mRobotLocation == 2) {
+						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
 						Command st1 = new DriveAndRotate(1, -0.3, -0.3),  st2 = new DriveStraight(1, -0.5),
 								st3 = new DriveAndRotate(0.6, 0.3, -0.4), st4 = new DriveStraight(1.25, -0.45);
@@ -94,8 +81,8 @@ public class AutonControl {
 						cmGrp.start();
 					}
 					// FINISHED
-					else if(mDSLocation == 3) {
-						System.out.println("Case L3");
+					else if(mRobotLocation == 3) {
+						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
 						Command st1 = new DriveStraight(3, -0.6);
 						
@@ -110,8 +97,8 @@ public class AutonControl {
 				// Switch on right-hand side
 				else if(switchLocation == 'R') {
 					// FINISHED
-					if(mDSLocation == 1) {
-						System.out.print("Case R1");
+					if(mRobotLocation == 1) {
+						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
 						Command st1 = new DriveStraight(1.5, -0.8);
 						
@@ -119,8 +106,8 @@ public class AutonControl {
 						cmGrp.start();
 					}
 					// FINISHED
-					else if(mDSLocation == 2) {
-						System.out.print("Case R2");
+					else if(mRobotLocation == 2) {
+						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
 						Command st1 = new DriveAndRotate(0.5, 0.3, -0.3),  st2 = new DriveStraight(1.25, -0.5),
 								st3 = new DriveAndRotate(0.4, -0.3, -0.4), st4 = new DriveStraight(1.25, -0.5);
@@ -132,10 +119,10 @@ public class AutonControl {
 						cmGrp.start();
 					}
 					// FINISHED
-					else if(mDSLocation == 3) {
-						System.out.print("Case R3");
+					else if(mRobotLocation == 3) {
+						System.out.println("Auton case is: " + switchLocation + mRobotLocation);
 						CommandGroup cmGrp = new CommandGroup();
-						Command st1 = new DriveStraight(1, -0.6),        st2 = new DriveAndRotate(1.25, 0.2, -0.4),
+						Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1.25, 0.2, -0.4),
 								st3 = new DriveAndRotate(1, -0.35, -0.3), st4 = new DriveStraight(1.25, -0.6);
 						
 						cmGrp.addSequential(st1);

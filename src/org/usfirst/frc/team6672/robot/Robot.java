@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.SetRobotLocation;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
@@ -41,10 +42,10 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	
 	public static DigitalInput limitTop = new DigitalInput(9);
-//	public static DigitalInput limitBot = new DigitalInput(8);
+	public static DigitalInput limitBot = new DigitalInput(8);
 	
 	Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate,
-		cmChangeDSLocation;
+		cmSetRobotLocation;
 
 	SendableChooser<Command> cWinchControl = new SendableChooser<>();
 	SendableChooser<Command> cLiftControl = new SendableChooser<>();
@@ -71,7 +72,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Winch Command", winchControl);
 		SmartDashboard.putData("Taster Command", tasterControl);
 		SmartDashboard.putData("Top Limit", limitTop);
-//		SmartDashboard.putData("Bottom Limit", limitBot);
+		SmartDashboard.putData("Bottom Limit", limitBot);
+//		SmartDashboard.putNumber("Robot Location", autonControl.mRobotLocation);
 		
 		cLiftControl.addObject("Lift (10)", new SetLiftSpeed(1.0));	
 		cLiftControl.addDefault("Lift (8)", new SetLiftSpeed(0.8));
@@ -124,17 +126,16 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+//		Scheduler.getInstance().run();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
-		System.out.println("Autonomous initiating...");
-		Robot.driveControl.resetGyro();
-		cmChangeDSLocation = cRobotLocation.getSelected();
-		cmChangeDSLocation.start();
-		System.out.println("Driver Station has changed to: " + autonControl.mDSLocation);
+		DriverStation.reportWarning("Autonomous initiating...", false);
+		cmSetRobotLocation = cRobotLocation.getSelected();
+		cmSetRobotLocation.start();
 		autonControl.runAuton();	// Runs main auton program
 	}
 
@@ -144,10 +145,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-//		if(autonControl.checkGameData() && !isCalledBefore) {
-//			this.isCalledBefore = true;
-//			autonControl.runAuton();
-//		}
 	}
 
 	@Override
