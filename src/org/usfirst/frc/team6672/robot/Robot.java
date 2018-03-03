@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
+import org.usfirst.frc.team6672.robot.commands.drive.autonomous.SetRobotLocation;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
 import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
@@ -49,7 +50,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> cLiftControl = new SendableChooser<>();
 	SendableChooser<Command> cTasterControl = new SendableChooser<>();
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
-
+	SendableChooser<Command> cRobotLocation = new SendableChooser<>();
 //	boolean isCalledBefore = false;
 	
 	/**
@@ -95,10 +96,15 @@ public class Robot extends TimedRobot {
 		cDriveControlRotate.addDefault("Rotate (6)", new SetRotateSpeed(0.6));	
 		cDriveControlRotate.addObject("Rotate (4)", new SetRotateSpeed(0.4));	
 
+		cRobotLocation.addDefault("Left", new SetRobotLocation(1));
+		cRobotLocation.addObject("Middle", new SetRobotLocation(2));
+		cRobotLocation.addObject("Right", new SetRobotLocation(3));
+		
 		SmartDashboard.putData("Lift Speed", cLiftControl);
 		SmartDashboard.putData("Taster Speed", cTasterControl);
 		SmartDashboard.putData("Rotate Speed", cDriveControlRotate);
 		SmartDashboard.putData("Winch Speed", cWinchControl);
+		SmartDashboard.putData("Robot Location", cRobotLocation);
 	}
 
 	/**
@@ -125,7 +131,10 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 		Robot.driveControl.resetGyro();
+		cmChangeDSLocation = cRobotLocation.getSelected();
+		cmChangeDSLocation.start();
 		autonControl.runAuton();				// Runs main auton program
+
 	}
 
 	/**
