@@ -45,7 +45,7 @@ public class RobotMap {
 	
 	public static double boxControl_def_speed = 0.6;
 	public static double driveControl_def_driveSpeed= 0.8;
-	public static double driveControl_def_rotateSpeed = 0.6;
+	public static double driveControl_def_rotateSpeed = 0.5;
 	public static double liftControl_def_speed = 0.8;
 	public static double tasterControl_def_speed = 1.0;
 	public static double winchControl_def_speed = 0.4;

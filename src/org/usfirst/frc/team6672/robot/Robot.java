@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> cTasterControl = new SendableChooser<>();
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
 
-	boolean isCalledBefore = false;
+//	boolean isCalledBefore = false;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -125,7 +125,7 @@ public class Robot extends TimedRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 		Robot.driveControl.resetGyro();
-//		autonControl.runAuton();				// Runs main auton program
+		autonControl.runAuton();				// Runs main auton program
 	}
 
 	/**
@@ -134,10 +134,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		if(autonControl.checkGameData() && !isCalledBefore) {
-			this.isCalledBefore = true;
-			autonControl.runAuton();
-		}
+//		if(autonControl.checkGameData() && !isCalledBefore) {
+//			this.isCalledBefore = true;
+//			autonControl.runAuton();
+//		}
 	}
 
 	@Override

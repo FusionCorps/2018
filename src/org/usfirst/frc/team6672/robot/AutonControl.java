@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonControl {
-
-	String gameData = getGameData();
+	
+	String mGameData = "RRR";
 	
 	//	[ ]		3	
 	//			2	Autonomous 1
@@ -37,7 +37,7 @@ public class AutonControl {
 	}
 	
 	public boolean checkGameData() {
-		return gameData.length() > 0;
+		return mGameData.length() > 0;
 	}
 	
 	public String getGameData() {
@@ -49,6 +49,9 @@ public class AutonControl {
 	}
 	
 	public void runAuton() {
+		
+		String gameData = getGameData();
+		this.mGameData = gameData;
 		
 		int dsLocation = getDSLocation();
 		
