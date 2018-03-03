@@ -78,11 +78,11 @@ public class Robot extends TimedRobot {
 		cLiftControl.addObject("Lift (4)", new SetLiftSpeed(0.4));
 		cLiftControl.addObject("Lift (2)", new SetLiftSpeed(0.4));
 
-		cTasterControl.addObject("Taster (10)", new SetTasterSpeed(1.0));	
-		cTasterControl.addDefault("Taster (8)", new SetTasterSpeed(0.8));
-		cTasterControl.addObject("Taster (5)", new SetTasterSpeed(0.5));
-		cTasterControl.addObject("Taster (-8)", new SetTasterSpeed(-0.8));
-		cTasterControl.addObject("Taster (-10)", new SetTasterSpeed(-1.0));
+		cTasterControl.addObject("Taster (5)", new SetTasterSpeed(0.5));	
+		cTasterControl.addDefault("Taster (3)", new SetTasterSpeed(0.3));
+		cTasterControl.addObject("Taster (2)", new SetTasterSpeed(0.2));
+		cTasterControl.addObject("Taster (-1)", new SetTasterSpeed(-0.1));
+		cTasterControl.addObject("Taster (-2)", new SetTasterSpeed(-0.2));
 		
 		cWinchControl.addObject("Winch (10)", new SetWinchSpeed(1.0));	
 		cWinchControl.addDefault("Winch (8)", new SetWinchSpeed(0.8));
