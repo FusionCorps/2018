@@ -61,13 +61,23 @@ public class DriveControl extends Subsystem {
 	}
 	
 	public void gyroDrive(double tempSpeed) {
-//		double angle = gyro.getAngle();
+		double angle = gyro.getAngle();
 		curveDrive(tempSpeed, 0.0);
+//		curveDrive(tempSpeed, -angle*Kp);
+	}
+	
+	public void gyroDrive(double tempSpeed, boolean gyro) {
+	
+	}
+	
+	public void gyroDrive(double tempSpeed, double turnAmt, boolean gyro) {
+		
 	}
 	
 	public void gyroDrive(double tempSpeed, double turnAmt) {
-//		double angle = gyro.getAngle();
+		double angle = gyro.getAngle();
 		curveDrive(tempSpeed, turnAmt);
+//		curveDrive(tempSpeed, (-angle+turnAmt)*Kp);
 	}
 	
     public void initDefaultCommand() {

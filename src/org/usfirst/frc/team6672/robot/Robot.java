@@ -20,6 +20,7 @@ import org.usfirst.frc.team6672.robot.commands.drive.autonomous.RunAutonCase;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
 import org.usfirst.frc.team6672.robot.commands.winch.SetWinchSpeed;
+import org.usfirst.frc.team6672.robot.commands.drive.autonomous.*;
 import org.usfirst.frc.team6672.robot.subsystems.*;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -54,7 +55,7 @@ public class Robot extends TimedRobot {
 	
 	public static CommandGroup autonGrp = new CommandGroup();
 	
-	public static int mRobotLocation = 4; // Default value set to 4
+	public static int mRobotLocation = 1; // Default value set to 4
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -84,7 +85,7 @@ public class Robot extends TimedRobot {
 		cLiftControl.addObject("Lift (2)", new SetLiftSpeed(0.4));
 
 		cTasterControl.addObject("Taster (-4)", new SetTasterSpeed(-0.4));	
-		cTasterControl.addDefault("Taster (-3)", new SetTasterSpeed(-0.35));
+		cTasterControl.addDefault("Taster (-3)", new SetTasterSpeed(-0.33));
 		cTasterControl.addObject("Taster (-2)", new SetTasterSpeed(-0.2));
 		cTasterControl.addObject("Taster (1)", new SetTasterSpeed(0.1));
 		cTasterControl.addObject("Taster (2)", new SetTasterSpeed(0.2));
@@ -135,6 +136,7 @@ public class Robot extends TimedRobot {
 		cmSetRobotLocation = new SetRobotLocation((int)(SmartDashboard.getNumber("Robot Location", 1)));
 		Command runAutonCase = new RunAutonCase();
 		autonGrp.addSequential(cmSetRobotLocation);
+		autonGrp.addSequential(new Wait(3));
 		autonGrp.addSequential(runAutonCase);
 		autonGrp.start();
 	}

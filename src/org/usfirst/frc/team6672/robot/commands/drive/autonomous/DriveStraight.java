@@ -25,6 +25,7 @@ public class DriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.driveControl.resetGyro();
     	Robot.driveControl.gyroDrive(mStraightSpeed);
     }
 
