@@ -23,6 +23,7 @@ public class RunAutonCase extends Command {
     protected void initialize() {
 		char switchLocation = DriverStation.getInstance().getGameSpecificMessage().charAt(0);
 		char scaleLocation = DriverStation.getInstance().getGameSpecificMessage().charAt(2);
+		
 		if(switchLocation == 'L') {
 			if(Robot.mRobotLocation == 1) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
