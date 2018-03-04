@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
 	
 	public static CommandGroup autonGrp = new CommandGroup();
 	
-	public static int mRobotLocation = 1; // Default value set to 4
+	public static int mRobotLocation = 3; // Default value set to 4
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -84,8 +84,8 @@ public class Robot extends TimedRobot {
 		cLiftControl.addObject("Lift (4)", new SetLiftSpeed(0.4));
 		cLiftControl.addObject("Lift (2)", new SetLiftSpeed(0.4));
 
-		cTasterControl.addObject("Taster (-4)", new SetTasterSpeed(-0.4));	
-		cTasterControl.addDefault("Taster (-3)", new SetTasterSpeed(-0.33));
+		cTasterControl.addDefault("Taster (-5.3)", new SetTasterSpeed(-0.53));	
+		cTasterControl.addObject("Taster (-3)", new SetTasterSpeed(-0.33));
 		cTasterControl.addObject("Taster (-2)", new SetTasterSpeed(-0.2));
 		cTasterControl.addObject("Taster (1)", new SetTasterSpeed(0.1));
 		cTasterControl.addObject("Taster (2)", new SetTasterSpeed(0.2));
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
 		cmSetRobotLocation = new SetRobotLocation((int)(SmartDashboard.getNumber("Robot Location", 1)));
 		Command runAutonCase = new RunAutonCase();
 		autonGrp.addSequential(cmSetRobotLocation);
-		autonGrp.addSequential(new Wait(7));
+		autonGrp.addSequential(new Wait(1));
 		autonGrp.addSequential(runAutonCase);
 		autonGrp.start();
 	}

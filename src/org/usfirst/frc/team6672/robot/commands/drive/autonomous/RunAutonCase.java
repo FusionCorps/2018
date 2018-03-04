@@ -27,29 +27,18 @@ public class RunAutonCase extends Command {
 		if(switchLocation == 'L') {
 			if(Robot.mRobotLocation == 1) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
-//				Command st1 = new DriveStraight(1.5, -0.6),     st2 = new DriveAndRotate(0.5, -0.2, -0.4),
-//						st3 = new DriveAndRotate(2, 0.2, -0.3), st4 = new DriveStraight(1, -0.6);
-//				
-////				Command st1 = new DriveStraight(1, -0.5), st2 = new DriveRotate(1, 90);
-//				
-//				
-//				caseCommand.addSequential(st1);
-//				caseCommand.addSequential(st2);
-//				caseCommand.addSequential(st3);
-//				caseCommand.addSequential(st4);
-//				
-////				caseCommand.addSequential(st1);
-////				caseCommand.addSequential(st2);
-//				caseCommand.start();
-				Command st1 = new DriveAndRotate(3, 0.045, -0.5);
-				caseCommand.addSequential(st1);				
+				Command st1 = new DriveStraight(1, -0.6),        st2 = new DriveAndRotate(1, -0.2, -0.4),
+						st3 = new DriveAndRotate(1, 0.35, -0.3), st4 = new DriveStraight(1.25, -0.6);
+				caseCommand.addSequential(st1);
+				caseCommand.addSequential(st2);
+				caseCommand.addSequential(st3);
+				caseCommand.addSequential(st4);
 				caseCommand.start();
 			}
 			else if(Robot.mRobotLocation == 2) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
-				Command st1 = new DriveAndRotate(0.5, -0.3, -0.3),st2 = new DriveStraight(1, -0.5),
+				Command st1 = new DriveAndRotate(0.5, -0.3, -0.3), st2 = new DriveStraight(1, -0.5),
 						st3 = new DriveAndRotate(0.65, 0.3, -0.4), st4 = new DriveStraight(1.25, -0.45);
-				
 				caseCommand.addSequential(st1);
 				caseCommand.addSequential(st2);
 				caseCommand.addSequential(st3);
@@ -58,10 +47,6 @@ public class RunAutonCase extends Command {
 			}
 			else if(Robot.mRobotLocation == 3) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
-//				Command st1 = new DriveStraight(3, -0.6);
-//				
-//				caseCommand.addSequential(st1);
-//				caseCommand.start();
 				Command st1 = new DriveAndRotate(3, 0.045, -0.5);
 				caseCommand.addSequential(st1);				
 				caseCommand.start();
@@ -73,13 +58,9 @@ public class RunAutonCase extends Command {
 		else if(switchLocation == 'R') {
 			if(Robot.mRobotLocation == 1) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
-//				Command st1 = new DriveStraight(2.5, -0.5);
-//				
 				Command st1 = new DriveAndRotate(3, 0.045, -0.5);
 				caseCommand.addSequential(st1);				
 				caseCommand.start();
-//				caseCommand.addSequential(st1);
-//				caseCommand.start();
 			}
 			else if(Robot.mRobotLocation == 2) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
@@ -94,21 +75,14 @@ public class RunAutonCase extends Command {
 			}
 			else if(Robot.mRobotLocation == 3) {
 				System.out.println("Auton case is: " + switchLocation + Robot.mRobotLocation);
-//				Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1, 0.2, -0.4),
-//						st3 = new DriveAndRotate(1, -0.35, -0.3), st4 = new DriveStraight(1.25, -0.6);
+				Command st1 = new DriveStraight(1, -0.6),         st2 = new DriveAndRotate(1, 0.2, -0.4),
+						st3 = new DriveAndRotate(1, -0.35, -0.3), st4 = new DriveStraight(1.25, -0.6);
 				
-//				caseCommand.addSequential(st1);
-//				caseCommand.addSequential(st2);
-//				caseCommand.addSequential(st3);
-//				caseCommand.addSequential(st4);
-				
-				Command st1 = new DriveAndRotate(3, 0.045, -0.5);
-				caseCommand.addSequential(st1);				
+				caseCommand.addSequential(st1);
+				caseCommand.addSequential(st2);
+				caseCommand.addSequential(st3);
+				caseCommand.addSequential(st4);			
 				caseCommand.start();
-
-//				Command st1 = new DriveStraight(2, -0.2), st2 = new DriveRotate(1, -0.2);
-
-//				caseCommand.addSequential(st2);
 			}
 			else {
 				DriverStation.reportError("Auton failed to start (Robot Location): " + Robot.mRobotLocation, false);
