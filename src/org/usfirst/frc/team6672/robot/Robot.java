@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
 		cmSetRobotLocation = new SetRobotLocation((int)(SmartDashboard.getNumber("Robot Location", 1)));
 		Command runAutonCase = new RunAutonCase();
 		autonGrp.addSequential(cmSetRobotLocation);
-		autonGrp.addSequential(new Wait(3));
+		autonGrp.addSequential(new Wait(7));
 		autonGrp.addSequential(runAutonCase);
 		autonGrp.start();
 	}

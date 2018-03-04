@@ -1,23 +1,21 @@
 package org.usfirst.frc.team6672.robot.commands.drive.autonomous;
 
 import org.usfirst.frc.team6672.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveAndRotate extends Command {
+public class DriveStraightGyro extends Command {
 
-	double mRunTime;
-	double mTurnAmt;
-	double mStraightSpeed;
+	double mRunTime, mStraightSpeed;
 	
-    public DriveAndRotate(double runTime, double turnAmt, double straightSpeed) {
+    public DriveStraightGyro(double runTime, double StraightSpeed) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveControl);
         this.mRunTime = runTime;
-        this.mTurnAmt = turnAmt;
-        this.mStraightSpeed = straightSpeed;
+        this.mStraightSpeed = StraightSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -28,8 +26,10 @@ public class DriveAndRotate extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveControl.resetGyro();
-    	Robot.driveControl.gyroDrive(mStraightSpeed, mTurnAmt);
-    	
+    	while(!isTimedOut()) {
+    		double angle = Robot.driveControl.getGyroAngle();
+        	Robot.driveControl.gyroDrive(mStraightSpeed, -angle);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveAndRotate extends Command {
+public class DriveAndRotateGyro extends Command {
 
 	double mRunTime;
 	double mTurnAmt;
 	double mStraightSpeed;
 	
-    public DriveAndRotate(double runTime, double turnAmt, double straightSpeed) {
+    public DriveAndRotateGyro(double runTime, double turnAmt, double straightSpeed) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.driveControl);
         this.mRunTime = runTime;
@@ -28,8 +28,10 @@ public class DriveAndRotate extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveControl.resetGyro();
-    	Robot.driveControl.gyroDrive(mStraightSpeed, mTurnAmt);
-    	
+    	while(!isTimedOut()) {
+    		double angle = Robot.driveControl.getGyroAngle();
+        	Robot.driveControl.gyroDrive(mStraightSpeed, (-angle+mTurnAmt)*0.01);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
