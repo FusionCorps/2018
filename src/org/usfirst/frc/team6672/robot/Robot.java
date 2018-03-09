@@ -44,8 +44,9 @@ public class Robot extends TimedRobot {
 	public static DigitalInput limitTop = new DigitalInput(9);
 	public static DigitalInput limitBot = new DigitalInput(8);
 	
-	Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate,
-		cmSetRobotLocation;
+	public static Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate,
+		cmSetRobotLocation, cmSetAutonTarget;
+	public static CommandGroup autonGrp = new CommandGroup();
 
 	SendableChooser<Command> cWinchControl = new SendableChooser<>();
 	SendableChooser<Command> cLiftControl = new SendableChooser<>();
@@ -53,9 +54,8 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
 	SendableChooser<Command> cRobotLocation = new SendableChooser<>();
 	
-	public static CommandGroup autonGrp = new CommandGroup();
-	
-	public static int mRobotLocation = 3; // Default value set to 4
+	public static int mRobotLocation = 3; // Default value set to 3
+	public static int mAutonTarget = 0; // 0 = SWITCH, 1 = SCALE
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
 		
 		CameraServer.getInstance().startAutomaticCapture();
 
@@ -77,9 +78,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Top Limit", limitTop);
 		SmartDashboard.putData("Bottom Limit", limitBot);
 		SmartDashboard.putNumber("Robot Location", mRobotLocation);
+		SmartDashboard.putNumber("Auton Target", mAutonTarget);
 		
-		cLiftControl.addObject("Lift (10)", new SetLiftSpeed(1.0));	
-		cLiftControl.addDefault("Lift (8)", new SetLiftSpeed(0.8));
+		cLiftControl.addDefault("Lift (10)", new SetLiftSpeed(1.0));	
+		cLiftControl.addObject("Lift (8)", new SetLiftSpeed(0.8));
 		cLiftControl.addObject("Lift (6)", new SetLiftSpeed(0.6));
 		cLiftControl.addObject("Lift (4)", new SetLiftSpeed(0.4));
 		cLiftControl.addObject("Lift (2)", new SetLiftSpeed(0.4));
@@ -90,8 +92,8 @@ public class Robot extends TimedRobot {
 		cTasterControl.addObject("Taster (1)", new SetTasterSpeed(0.1));
 		cTasterControl.addObject("Taster (2)", new SetTasterSpeed(0.2));
 		
-		cWinchControl.addObject("Winch (10)", new SetWinchSpeed(1.0));	
-		cWinchControl.addDefault("Winch (8)", new SetWinchSpeed(0.8));
+		cWinchControl.addDefault("Winch (10)", new SetWinchSpeed(1.0));	
+		cWinchControl.addObject("Winch (8)", new SetWinchSpeed(0.8));
 		cWinchControl.addObject("Winch (5)", new SetWinchSpeed(0.5));
 		cWinchControl.addObject("Winch (-8)", new SetWinchSpeed(-0.8));
 		cWinchControl.addObject("Winch (-10)", new SetWinchSpeed(-1.0));
@@ -126,6 +128,10 @@ public class Robot extends TimedRobot {
 		mRobotLocation = newRobotLocation;
 	}
 	
+	public static void setAutonTarget(int newAutonTarget) {
+		mAutonTarget = newAutonTarget;
+	}
+	
 	@Override
 	public void autonomousInit() {
 		DriverStation.reportWarning("Autonomous initiating...", false);
@@ -134,9 +140,17 @@ public class Robot extends TimedRobot {
 		autonGrp = new CommandGroup();
 		
 		cmSetRobotLocation = new SetRobotLocation((int)(SmartDashboard.getNumber("Robot Location", 1)));
+		
+//		UNCOMMENT THIS TO ALLOW FOR SCALE AUTO
+		cmSetAutonTarget = new SetAutonTarget((int)(SmartDashboard.getNumber("Auton Target", 0)));
+		
+//		COMMENT THIS TO ALLOW FOR SCALE AUTO
+//		cmSetAutonTarget = new SetAutonTarget(0);
+		
 		Command runAutonCase = new RunAutonCase();
 		autonGrp.addSequential(cmSetRobotLocation);
-		autonGrp.addSequential(new Wait(1));
+		autonGrp.addSequential(cmSetAutonTarget);
+		autonGrp.addSequential(new Wait(0));
 		autonGrp.addSequential(runAutonCase);
 		autonGrp.start();
 	}

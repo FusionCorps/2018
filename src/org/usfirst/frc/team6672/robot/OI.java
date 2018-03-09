@@ -68,21 +68,9 @@ public class OI {
 		return stick.getRawAxis(axis);
 	}
 	
-	public boolean isStickActive(int axis) {
-		return stick.getRawAxis(axis) > 0.5;
-	}
-	
-	public boolean manualIntakeActivated() {
-		return buttonBack.get() && stick.getRawAxis(3) > .5 ;
-	}
-	
-	public boolean manualEjectActivated() {
-		return buttonBack.get() && stick.getRawAxis(2) > .5 ;
-	}
-	
 	public OI() {
 		buttonA.whileHeld(new HoldLift());
-		buttonX.whenPressed(new SetDriveSpeed(0.4));
+		buttonX.whenPressed(new SetDriveSpeed(0.4)); // TODO Not needed?
 		buttonY.whenPressed(new SetDriveSpeed(1.0));
 		lBumper.whileHeld(new LowerLift());
 		rBumper.whileHeld(new RaiseLift());

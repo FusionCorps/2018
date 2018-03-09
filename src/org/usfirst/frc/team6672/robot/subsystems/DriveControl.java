@@ -15,13 +15,12 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 public class DriveControl extends Subsystem {
 
     // Put methods for controlling this subsystem here. Call these from Commands.
-
 	SpeedController lSpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_L1);
 	SpeedController l2SpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_L2);
+	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
+
 	SpeedController rSpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_R1);
 	SpeedController r2SpeedController = new Spark(RobotMap.DRIVECONTROL_SPARK_R2);
-	
-	SpeedController lSpeedControllerGroup = new SpeedControllerGroup(lSpeedController, l2SpeedController);
 	SpeedController rSpeedControllerGroup = new SpeedControllerGroup(rSpeedController, r2SpeedController);
 	
 	DifferentialDrive robotDrive = new DifferentialDrive(lSpeedControllerGroup, rSpeedControllerGroup);

@@ -32,53 +32,53 @@ public class BoxMusic extends Command {
     protected void initialize() {
     }
     
-    public void playMusic(double[] inputMusic) {
-    	for(double x : inputMusic) {
-    		boolean isHalfNote = false;
-    		if(x == 2.0) {
-    			isHalfNote = true;
-    			continue;
-    		}
-    		if(isHalfNote == false) {
-        		Robot.boxControl.boxMusicSpeed(x);
-            	try {
-        			TimeUnit.MILLISECONDS.sleep(250);
-        		} catch (InterruptedException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-               	Robot.boxControl.boxMusicSpeed(stop);
-            	try {
-        			TimeUnit.MILLISECONDS.sleep(250);
-        		} catch (InterruptedException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-    		}
-    		if(isHalfNote == true) {
-        		Robot.boxControl.boxMusicSpeed(x);
-            	try {
-        			TimeUnit.MILLISECONDS.sleep(500);
-        		} catch (InterruptedException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-               	Robot.boxControl.boxMusicSpeed(stop);
-            	try {
-        			TimeUnit.MILLISECONDS.sleep(250);
-        		} catch (InterruptedException e) {
-        			// TODO Auto-generated catch block
-        			e.printStackTrace();
-        		}
-               	isHalfNote = false;
-    		}
-    	}
-    }
+//    public void playMusic(double[] inputMusic) {
+//    	for(double x : inputMusic) {
+//    		boolean isHalfNote = false;
+//    		if(x == 2.0) {
+//    			isHalfNote = true;
+//    			continue;
+//    		}
+////    		if(isHalfNote == false) {
+////        		Robot.boxControl.boxMusicSpeed(x);
+////            	try {
+////        			TimeUnit.MILLISECONDS.sleep(250);
+////        		} catch (InterruptedException e) {
+////        			// TODO Auto-generated catch block
+////        			e.printStackTrace();
+////        		}
+////               	Robot.boxControl.boxMusicSpeed(stop);
+////            	try {
+////        			TimeUnit.MILLISECONDS.sleep(250);
+////        		} catch (InterruptedException e) {
+////        			// TODO Auto-generated catch block
+////        			e.printStackTrace();
+////        		}
+////    		}
+////    		if(isHalfNote == true) {
+////        		Robot.boxControl.boxMusicSpeed(x);
+////            	try {
+////        			TimeUnit.MILLISECONDS.sleep(500);
+////        		} catch (InterruptedException e) {
+////        			// TODO Auto-generated catch block
+////        			e.printStackTrace();
+////        		}
+////               	Robot.boxControl.boxMusicSpeed(stop);
+////            	try {
+////        			TimeUnit.MILLISECONDS.sleep(250);
+////        		} catch (InterruptedException e) {
+////        			// TODO Auto-generated catch block
+////        			e.printStackTrace();
+////        		}
+////               	isHalfNote = false;
+//    		}
+//    	}
+////    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	System.out.println("Setting up orchestra...");
-    	playMusic(twinkle);
+//    	playMusic(twinkle);
     }
 
     // Make this return true when this Command no longer needs to run execute()

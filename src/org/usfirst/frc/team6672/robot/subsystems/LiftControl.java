@@ -33,6 +33,7 @@ public class LiftControl extends Subsystem {
 		liftController.set(0.0);
 	}
 	
+	// TODO Find better way to wait
 	public void holdLift() {
 		liftController.set(0.0);
     	try {
