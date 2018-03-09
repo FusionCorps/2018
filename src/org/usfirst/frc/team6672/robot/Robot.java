@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> cDriveControlRotate = new SendableChooser<>();
 	SendableChooser<Command> cRobotLocation = new SendableChooser<>();
 	
-	public static int mRobotLocation = 3; // Default value set to 3
+	public static int mRobotLocation = 2; // Default value set to 3
 	public static int mAutonTarget = 0; // 0 = SWITCH, 1 = SCALE
 	
 	/**
@@ -79,6 +79,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Bottom Limit", limitBot);
 		SmartDashboard.putNumber("Robot Location", mRobotLocation);
 		SmartDashboard.putNumber("Auton Target", mAutonTarget);
+		SmartDashboard.putNumber("Wait Time", 0.0);
 		
 		cLiftControl.addDefault("Lift (10)", new SetLiftSpeed(1.0));	
 		cLiftControl.addObject("Lift (8)", new SetLiftSpeed(0.8));
@@ -150,7 +151,7 @@ public class Robot extends TimedRobot {
 		Command runAutonCase = new RunAutonCase();
 		autonGrp.addSequential(cmSetRobotLocation);
 		autonGrp.addSequential(cmSetAutonTarget);
-		autonGrp.addSequential(new Wait(0));
+		autonGrp.addSequential(new Wait((int)SmartDashboard.getNumber("Wait Time", 0)));
 		autonGrp.addSequential(runAutonCase);
 		autonGrp.start();
 	}
