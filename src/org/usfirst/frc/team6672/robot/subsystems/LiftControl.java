@@ -26,7 +26,7 @@ public class LiftControl extends Subsystem {
 	
 	public void lowerLift() {
 		liftController.setInverted(true);
-		liftController.set(0.2);
+		liftController.set(RobotMap.liftControl_def_lower_speed);
 	}
 	
 	public void stopLift() {

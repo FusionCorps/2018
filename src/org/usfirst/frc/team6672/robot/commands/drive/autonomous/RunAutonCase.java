@@ -30,8 +30,15 @@ public class RunAutonCase extends Command {
 					caseCommand.start();
 				} else if (Robot.mRobotLocation == 2) {
 					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
-					Command st1 = new DriveAndRotate(0.5, -0.3, -0.3), st2 = new DriveStraight(0.85, -0.5),
+					
+//					Old but working
+					Command st1 = new DriveAndRotate(0.5, -0.3, -0.3), st2 = new DriveStraight(1.1, -0.5),
 							st3 = new DriveAndRotate(0.4, 0.3, -0.4), st4 = new DriveStraight(1.25, -0.6);
+					
+//					New maybe working
+//					Command st1 = new DriveAndRotate(1.2, -0.2, -0.2), st2 = new DriveStraight(4, -0.3),
+//							st3 = new DriveAndRotate(1.2, 0.2, -0.2), st4 = new DriveStraight(1.25, -0.6);
+					
 					caseCommand.addSequential(st1);
 					caseCommand.addSequential(st2);
 					caseCommand.addSequential(st3);
@@ -108,7 +115,6 @@ public class RunAutonCase extends Command {
 					caseCommand.addSequential(st3);
 					caseCommand.addSequential(st4);
 					caseCommand.start();
-
 				}
 			}
 		}

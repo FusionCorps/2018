@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6672.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-//import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeUnit;
 import org.usfirst.frc.team6672.robot.Robot;
 import org.usfirst.frc.team6672.robot.RobotMap;
 import org.usfirst.frc.team6672.robot.commands.box.IntakeBox;
@@ -28,10 +28,15 @@ public class BoxControl extends Subsystem {
 		controller2.setInverted(false);
 		if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) >= 0.8) {
 			intakeGroup.set(0.8);
-		}
-		else if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) < 0.8) {
+		} else if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) < 0.8) {
 			intakeGroup.set(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3));
 		}
+	}
+	
+	public void boxIntake(double speed) {
+		controller1.setInverted(true);
+		controller2.setInverted(false);
+		intakeGroup.set(speed);
 	}
 	
 	public void boxIntake(boolean isFixed) {
@@ -40,6 +45,7 @@ public class BoxControl extends Subsystem {
 		intakeGroup.set(speed);
 	}
 	
+	// Box Eject
 	public void boxEject() {
 		controller1.setInverted(false);
 		controller2.setInverted(true);
@@ -58,21 +64,20 @@ public class BoxControl extends Subsystem {
 		intakeGroup.set(speed);
 	}
 	
-	// TODO Is still needed?
-//	public void boxDislodge() {
-//       	boxEjectFixed();
-//    	try {
-//			TimeUnit.MILLISECONDS.sleep(100);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//    	boxIntakeFixed();
-//       	try {
-//    			TimeUnit.MILLISECONDS.sleep(200);
-//    		} catch (InterruptedException e) {
-//    			e.printStackTrace();
-//    	}
-//	}
+	public void boxDislodge() {
+       	boxEject(true);
+    	try {
+			TimeUnit.MILLISECONDS.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    	boxIntake(true);
+       	try {
+    			TimeUnit.MILLISECONDS.sleep(200);
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    	}
+	}
 	
 	public void boxStop() {
 		intakeGroup.set(0.0);
