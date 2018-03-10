@@ -30,7 +30,6 @@ public class ErrorHandler {
 		 * 		9: Custom status
 		 */
 		
-		
 		case 000: retMessage(err, robot, "Fatal error"); break;
 		case 001: retMessage(stat, robot, "robotInit()!"); break;
 		case 100: retMessage(stat, drive, "Ok!"); break;
