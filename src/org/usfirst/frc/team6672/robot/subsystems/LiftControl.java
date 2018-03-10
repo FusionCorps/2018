@@ -44,7 +44,7 @@ public class LiftControl extends Subsystem {
 		}
     	liftController.set(0.4);
     	try {
-			TimeUnit.MILLISECONDS.sleep(30);
+			TimeUnit.MILLISECONDS.sleep(40);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

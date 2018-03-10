@@ -69,10 +69,10 @@ public class OI {
 	}
 	
 	public OI() {
-		buttonA.whileHeld(new HoldLift());
+		buttonA.whileHeld(new LowerLift());
 		buttonX.whenPressed(new SetDriveSpeed(0.4)); // TODO Not needed?
 		buttonY.whenPressed(new SetDriveSpeed(1.0));
-		lBumper.whileHeld(new LowerLift());
+		lBumper.whileHeld(new HoldLift());
 		rBumper.whileHeld(new RaiseLift());
 		buttonBack.whileHeld(new DislodgeBox()); // DEP 
 		buttonStart.whileHeld(new RaiseTaster());

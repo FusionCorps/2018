@@ -49,9 +49,7 @@ public class RunAutonCase extends Command {
 					Command st1 = new DriveAndRotate(3, 0.045, -0.5);
 					caseCommand.addSequential(st1);
 					caseCommand.start();
-				} else {
-					DriverStation.reportError("Auton failed to start (Robot Location): " + Robot.mRobotLocation, false);
-				}
+				} else { Robot.errH.reportState(299); }
 			} else if (switchLocation == 'R') {
 				if (Robot.mRobotLocation == 1) {
 					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
@@ -79,12 +77,8 @@ public class RunAutonCase extends Command {
 					caseCommand.addSequential(st3);
 //					caseCommand.addSequential(st4);
 					caseCommand.start();
-				} else {
-					DriverStation.reportError("Auton failed to start (Robot Location): " + Robot.mRobotLocation, false);
-				}
-			} else {
-				DriverStation.reportError("Auton failed to start (switchLocation): " + switchLocation, false);
-			}
+				} else { Robot.errH.reportState(299); }
+			} else { Robot.errH.reportState(299); }
 		} else {
 			if(scaleLocation == 'L') {
 				if(Robot.mRobotLocation == 1) {
@@ -92,8 +86,8 @@ public class RunAutonCase extends Command {
 					Command st1 = new DriveAndRotate(4.9, 0.03, 0.5), st2 = new DriveAndRotate(0.8, 0.25, 0), st3 = new AutoRaiseLift(), st4 = new AutoEjectBox();
 					caseCommand.addSequential(st1);
 					caseCommand.addSequential(st2);
-					caseCommand.addSequential(st3);
-					caseCommand.addSequential(st4);
+//					caseCommand.addSequential(st3);
+//					caseCommand.addSequential(st4);
 					caseCommand.start();
 				} else if(Robot.mRobotLocation == 3) {
 					System.out.println("Auton case is SCALE: " + scaleLocation + Robot.mRobotLocation);
@@ -112,8 +106,8 @@ public class RunAutonCase extends Command {
 					Command st1 = new DriveAndRotate(4.9, 0.03, 0.5), st2 = new DriveAndRotate(0.8, -0.25, 0), st3 = new AutoRaiseLift(), st4 = new AutoEjectBox();
 					caseCommand.addSequential(st1);
 					caseCommand.addSequential(st2);
-					caseCommand.addSequential(st3);
-					caseCommand.addSequential(st4);
+//					caseCommand.addSequential(st3);
+//					caseCommand.addSequential(st4);
 					caseCommand.start();
 				}
 			}

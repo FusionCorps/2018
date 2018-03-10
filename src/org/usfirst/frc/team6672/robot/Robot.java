@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.SetRobotLocation;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.RunAutonCase;
@@ -47,7 +47,8 @@ public class Robot extends TimedRobot {
 	public static Command cmBoxControl, cmLiftControl, cmTasterControl, cmWinchControl, cmDriveControlRotate,
 		cmSetRobotLocation, cmSetAutonTarget;
 	public static CommandGroup autonGrp = new CommandGroup();
-
+	public static ErrorHandler errH = new ErrorHandler(); 
+	
 	SendableChooser<Command> cWinchControl = new SendableChooser<>();
 	SendableChooser<Command> cLiftControl = new SendableChooser<>();
 	SendableChooser<Command> cTasterControl = new SendableChooser<>();
@@ -63,9 +64,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		errH.reportState(01);
 		oi = new OI();
-		
-		
 		CameraServer.getInstance().startAutomaticCapture();
 
 		// TODO Clean up smartdashboard sendablechoosers
@@ -135,14 +135,15 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void autonomousInit() {
-		DriverStation.reportWarning("Autonomous initiating...", false);
+		errH.reportState(201);
 		
 		autonGrp = null;
 		autonGrp = new CommandGroup();
 		
 		cmSetRobotLocation = new SetRobotLocation((int)(SmartDashboard.getNumber("Robot Location", 1)));
 		
-//		UNCOMMENT THIS TO ALLOW FOR SCALE AUTO
+//		UNCOMMENT THIS TO AL
+		//LOW FOR SCALE AUTO
 		cmSetAutonTarget = new SetAutonTarget((int)(SmartDashboard.getNumber("Auton Target", 0)));
 		
 //		COMMENT THIS TO ALLOW FOR SCALE AUTO
@@ -154,6 +155,7 @@ public class Robot extends TimedRobot {
 		autonGrp.addSequential(new Wait((int)SmartDashboard.getNumber("Wait Time", 0)));
 		autonGrp.addSequential(runAutonCase);
 		autonGrp.start();
+		errH.reportState(202);
 	}
 		
 	
