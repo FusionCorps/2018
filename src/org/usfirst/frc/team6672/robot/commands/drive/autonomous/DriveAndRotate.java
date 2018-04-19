@@ -23,6 +23,8 @@ public class DriveAndRotate extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	setTimeout(mRunTime);
+    	Robot.driveControl.rSpeedController.setInverted(false);
+    	Robot.driveControl.r2SpeedController.setInverted(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -40,6 +42,7 @@ public class DriveAndRotate extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.driveControl.stop();
+    	System.out.println("Done Rotating");
     }
 
     // Called when another command which requires one or more of the same

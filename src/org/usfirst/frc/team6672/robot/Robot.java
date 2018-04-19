@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 	public static LiftControl liftControl = new LiftControl();
 	public static TasterControl tasterControl = new TasterControl();
 	public static WinchControl winchControl = new WinchControl();
-		
+	
 	public static OI oi;
 	
 	public static DigitalInput limitTop = new DigitalInput(9);
@@ -67,6 +67,8 @@ public class Robot extends TimedRobot {
 		errH.reportState(01);
 		oi = new OI();
 		CameraServer.getInstance().startAutomaticCapture();
+		
+		driveControl.setupEncoder();
 
 		// TODO Clean up smartdashboard sendablechoosers
 		SmartDashboard.putData("Scheduled Commands", Scheduler.getInstance());
@@ -142,23 +144,22 @@ public class Robot extends TimedRobot {
 		
 		cmSetRobotLocation = new SetRobotLocation((int)(SmartDashboard.getNumber("Robot Location", 1)));
 		
-//		UNCOMMENT THIS TO AL
-		//LOW FOR SCALE AUTO
+//		UNCOMMENT THIS TO ALLOW FOR SCALE AUTO
 		cmSetAutonTarget = new SetAutonTarget((int)(SmartDashboard.getNumber("Auton Target", 0)));
 		
 //		COMMENT THIS TO ALLOW FOR SCALE AUTO
 //		cmSetAutonTarget = new SetAutonTarget(0);
 		
 		Command runAutonCase = new RunAutonCase();
+		Command runAutonCaseEncoder = new RunAutonCaseEncoder();
 		autonGrp.addSequential(cmSetRobotLocation);
 		autonGrp.addSequential(cmSetAutonTarget);
 		autonGrp.addSequential(new Wait((int)SmartDashboard.getNumber("Wait Time", 0)));
-		autonGrp.addSequential(runAutonCase);
+//		autonGrp.addSequential(runAutonCase);
+		autonGrp.addSequential(runAutonCaseEncoder);
 		autonGrp.start();
 		errH.reportState(202);
 	}
-		
-	
 
 	/**
 	 * This function is called periodically during autonomous.
@@ -171,13 +172,15 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Robot.driveControl.resetGyro();
+    	Robot.driveControl.lSpeedController.setInverted(false);
+    	Robot.driveControl.l2SpeedController.setInverted(false);
 	}
 
 	/**
 	 * This function is called periodically during operator control.
 	 */
 	@Override
-	public void teleopPeriodic() {
+	public void teleopPeriodic() { // Check overhead of constantly calling start command
 		Scheduler.getInstance().run();
 		
 		cmTasterControl = cTasterControl.getSelected();

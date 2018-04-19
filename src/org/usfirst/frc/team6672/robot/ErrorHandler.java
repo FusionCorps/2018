@@ -10,7 +10,7 @@ public class ErrorHandler {
 	public String type, system, message;
 	public String stat = "[   ]", err = "[ X ]", warn = "[ ! ]";
 	public String drive = "Drive", auton = "Auton", box = "Box  ",
-			lift = "Lift ",  winch = "Winch", robot = "Robot";
+			      lift = "Lift ",  winch = "Winch", robot = "Robot";
 	
 	public ErrorHandler() {
 	}
@@ -90,7 +90,7 @@ public class ErrorHandler {
 		return lastError;
 	}
 	
-	public void handleError(Command handleCommand) {
+	public void handleState(Command handleCommand) {
 		Scheduler.getInstance().add(handleCommand);
 		Scheduler.getInstance().run();
 	}

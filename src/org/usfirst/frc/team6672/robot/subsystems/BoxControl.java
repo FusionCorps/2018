@@ -27,7 +27,7 @@ public class BoxControl extends Subsystem {
 		controller1.setInverted(true);
 		controller2.setInverted(false);
 		if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) >= 0.8) {
-			intakeGroup.set(0.8);
+			intakeGroup.set(RobotMap.boxControl_def_intakeLimit_speed);
 		} else if(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3) < 0.8) {
 			intakeGroup.set(Robot.oi.getStickAxis(2)-Robot.oi.getStickAxis(3));
 		}

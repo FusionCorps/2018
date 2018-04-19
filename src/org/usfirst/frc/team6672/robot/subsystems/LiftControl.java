@@ -2,9 +2,7 @@ package org.usfirst.frc.team6672.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import java.util.concurrent.TimeUnit;
-
 import org.usfirst.frc.team6672.robot.RobotMap;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
@@ -33,20 +31,17 @@ public class LiftControl extends Subsystem {
 		liftController.set(0.0);
 	}
 	
-	// TODO Find better way to wait
 	public void holdLift() {
 		liftController.set(0.0);
     	try {
 			TimeUnit.MILLISECONDS.sleep(30);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	liftController.set(0.4);
     	try {
 			TimeUnit.MILLISECONDS.sleep(40);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
