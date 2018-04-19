@@ -36,8 +36,9 @@ public class RunAutonCaseEncoder extends Command {
 //					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
 					
 //					Old but working
-					Command st1 = new DriveAndRotate(0.7, -0.3, -0.3), st2 = new DriveStraightEncoder(-450),
-							st3 = new DriveAndRotate(0.5, 0.3, -0.3), st4 = new DriveStraightEncoder(-400);
+					Command st1 = new DriveAndRotate(0.7, -0.3, -0.3), st2 = new DriveStraightEncoder(-150),
+							st3 = new DriveAndRotate(0.5, 0.3, -0.3), st4 = new DriveStraightEncoder(-200);
+					
 					
 //					New maybe working
 //					Command st1 = new DriveAndRotate(1.2, -0.2, -0.2), st2 = new DriveStraight(4, -0.3),

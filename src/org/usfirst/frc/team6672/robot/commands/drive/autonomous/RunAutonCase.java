@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team6672.robot.Robot;
+import org.usfirst.frc.team6672.robot.commands.drive.encoderauton.EDriveStraight;
 
 public class RunAutonCase extends Command {
 
@@ -23,6 +24,9 @@ public class RunAutonCase extends Command {
 		if (Robot.mAutonTarget == 0) {
 			if (switchLocation == 'L') {
 				if (Robot.mRobotLocation == 1) {
+//					Command st0 = new EDriveStraight(200);
+//					caseCommand.addSequential(st0);
+//					caseCommand.start();
 //					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
 					Command st1 = new DriveStraight(8.5, -0.28), st2 = new DriveAndRotate(1, 0.35, 0), st3 = new DriveStraight(1.25, -0.6);
 					caseCommand.addSequential(st1);
@@ -47,14 +51,14 @@ public class RunAutonCase extends Command {
 					caseCommand.start();
 				} else if (Robot.mRobotLocation == 3) {
 //					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
-					Command st1 = new DriveAndRotate(3, 0.045, -0.5);
+					Command st1 = new DriveAndRotate(3, 0, -0.5);
 					caseCommand.addSequential(st1);
 					caseCommand.start();
 				} else { Robot.errH.reportState(299); }
 			} else if (switchLocation == 'R') {
 				if (Robot.mRobotLocation == 1) {
 //					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
-					Command st1 = new DriveAndRotate(3, 0.045, -0.5);
+					Command st1 = new DriveAndRotate(3, 0, -0.5);
 					caseCommand.addSequential(st1);
 					caseCommand.start();
 				} else if (Robot.mRobotLocation == 2) {

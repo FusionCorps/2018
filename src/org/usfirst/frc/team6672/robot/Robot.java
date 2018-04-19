@@ -171,6 +171,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		Robot.driveControl.setupEncoder();
 		Robot.driveControl.resetGyro();
     	Robot.driveControl.lSpeedController.setInverted(false);
     	Robot.driveControl.l2SpeedController.setInverted(false);
@@ -192,7 +193,8 @@ public class Robot extends TimedRobot {
 		cmLiftControl.start();
 		cmWinchControl.start();
 		cmDriveControlRotate.start();
-		
+//		System.out.println("Left Encoder" + driveControl.lEncoder.getDistance());
+//		System.out.println("Right Encoder" + driveControl.rEncoder.getDistance());
 		SmartDashboard.updateValues();
 	}
 

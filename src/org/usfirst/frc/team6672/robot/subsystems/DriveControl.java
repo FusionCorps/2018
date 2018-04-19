@@ -31,13 +31,15 @@ public class DriveControl extends Subsystem {
 	ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	
 	public Encoder lEncoder = new Encoder(0,1);
+	public Encoder rEncoder = new Encoder(2,3);
 	double p = 0.015;
 	// DRIVE STRAIGHT P VALUE: .015
 	// TURN P VALUE: .03
 	
 	public PIDController driveController = new PIDController(.015, 0, 0, lEncoder, combinedSpeedControllerGroup);
 	
-	double distancePerPulse = Math.PI * 6 / 360;
+	double lDistancePerPulse = Math.PI * 6 / 1440; // 2048
+	double rDistancePerPulse = Math.PI * 6 / 2048; //470
 	
 	double driveSpeed = RobotMap.driveControl_def_driveSpeed;
 	double rotateSpeed = RobotMap.driveControl_def_rotateSpeed;
@@ -45,10 +47,12 @@ public class DriveControl extends Subsystem {
 	double Kp = 0.03;
 	
 	public void setupEncoder() {
-		lEncoder.setDistancePerPulse(distancePerPulse);
+		lEncoder.setDistancePerPulse(lDistancePerPulse);
+		rEncoder.setDistancePerPulse(rDistancePerPulse);
 		driveController.setAbsoluteTolerance(5);
 		driveController.setOutputRange(-0.6, 0.6);
 		lEncoder.reset();
+		rEncoder.reset();
 	}
 	
 	public void setDriveSpeed(double newDriveSpeed) {
