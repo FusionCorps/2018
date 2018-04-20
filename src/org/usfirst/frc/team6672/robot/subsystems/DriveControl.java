@@ -38,8 +38,8 @@ public class DriveControl extends Subsystem {
 	
 	public PIDController driveController = new PIDController(.015, 0, 0, lEncoder, combinedSpeedControllerGroup);
 	
-	double lDistancePerPulse = Math.PI * 6 / 1440; // 2048
-	double rDistancePerPulse = Math.PI * 6 / 2048; //470
+	double lDistancePerPulse = Math.PI * 6 / 2048; // 2048
+	double rDistancePerPulse = Math.PI * 6 / 425; //425
 	
 	double driveSpeed = RobotMap.driveControl_def_driveSpeed;
 	double rotateSpeed = RobotMap.driveControl_def_rotateSpeed;

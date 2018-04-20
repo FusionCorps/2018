@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 //import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team6672.robot.commands.drive.SetRotateSpeed;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.SetRobotLocation;
+import org.usfirst.frc.team6672.robot.commands.drive.encoderauton.ERunAutonCase;
 import org.usfirst.frc.team6672.robot.commands.drive.autonomous.RunAutonCase;
 import org.usfirst.frc.team6672.robot.commands.lift.SetLiftSpeed;
 import org.usfirst.frc.team6672.robot.commands.taster.SetTasterSpeed;
@@ -152,11 +153,14 @@ public class Robot extends TimedRobot {
 		
 		Command runAutonCase = new RunAutonCase();
 		Command runAutonCaseEncoder = new RunAutonCaseEncoder();
+		Command eRunAutonCase = new ERunAutonCase();
 		autonGrp.addSequential(cmSetRobotLocation);
 		autonGrp.addSequential(cmSetAutonTarget);
 		autonGrp.addSequential(new Wait((int)SmartDashboard.getNumber("Wait Time", 0)));
-//		autonGrp.addSequential(runAutonCase);
-		autonGrp.addSequential(runAutonCaseEncoder);
+		autonGrp.addSequential(runAutonCase);
+//		autonGrp.addSequential(runAutonCaseEncoder);
+//		autonGrp.addSequential(eRunAutonCase);
+		
 		autonGrp.start();
 		errH.reportState(202);
 	}
@@ -193,8 +197,8 @@ public class Robot extends TimedRobot {
 		cmLiftControl.start();
 		cmWinchControl.start();
 		cmDriveControlRotate.start();
-//		System.out.println("Left Encoder" + driveControl.lEncoder.getDistance());
-//		System.out.println("Right Encoder" + driveControl.rEncoder.getDistance());
+		System.out.println("Left Encoder" + driveControl.lEncoder.getDistance());
+		System.out.println("Right Encoder" + driveControl.rEncoder.getDistance());
 		SmartDashboard.updateValues();
 	}
 

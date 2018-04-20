@@ -51,14 +51,14 @@ public class RunAutonCase extends Command {
 					caseCommand.start();
 				} else if (Robot.mRobotLocation == 3) {
 //					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
-					Command st1 = new DriveAndRotate(3, 0, -0.5);
+					Command st1 = new DriveAndRotate(3, -.04, -0.5);
 					caseCommand.addSequential(st1);
 					caseCommand.start();
 				} else { Robot.errH.reportState(299); }
 			} else if (switchLocation == 'R') {
 				if (Robot.mRobotLocation == 1) {
 //					System.out.println("Auton case is SWITCH: " + switchLocation + Robot.mRobotLocation);
-					Command st1 = new DriveAndRotate(3, 0, -0.5);
+					Command st1 = new DriveAndRotate(3, -.04, -0.5);
 					caseCommand.addSequential(st1);
 					caseCommand.start();
 				} else if (Robot.mRobotLocation == 2) {
